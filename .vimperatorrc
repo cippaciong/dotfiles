@@ -1,0 +1,10 @@
+set defsearch=duckduckgo
+
+"colorscheme cippaciong
+
+set showstatuslinks=2
+
+map <C-Right> :tabmove! +1<CR>
+map <C-Left> :tabmove! -1<CR>
+map <S-Right> gt
+map <S-Left> gT

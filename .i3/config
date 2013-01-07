@@ -18,12 +18,12 @@ font xft: tamsynmod 8
 
 # colors
 #class				border	backgr.	text
-client.focused               	#171717 #171717 #a6e22e
+client.focused               	#1c1c1c #aaaaaa #2e3436
 client.focused_inactive		#2e3436 #2e3436 #b9c8d1
-client.unfocused		#2e3436 #2e3436 #999999
+client.unfocused		#1c1c1c #1c1c1c #999999
 client.urgent			#cd989a #cd989a #2e3436
 
-client.background			#121212
+client.background			#1c1c1c
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -38,7 +38,7 @@ bindsym $mod+Shift+Q kill
 new_window 1pixel
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn "Tamsyn-9" -nb "#1C1C1C" -nf "#71757F" -sb "#1C1C1C" -sf "#A6E22E" -p 'run' -b -i
 
 # change focus
 bindsym $mod+j focus left
@@ -135,7 +135,7 @@ mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym ograve resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym 113 resize shrink width 10 px or 10 ppt
@@ -161,49 +161,57 @@ bar {
 	font xft: tamsynmod 8
 
 colors {
-        background #171717
-        statusline #171717
+        background #1c1c1c
+        statusline #1c1c1c
 ########################## border # back ## text ##################################################
-        focused_workspace  #171717 #171717 #a6e22e
+        focused_workspace  #1c1c1c #1c1c1c #a6e22e
 	active_workspace   #ffffff #333333
-        inactive_workspace #171717 #171717 #9c9c9c
+        inactive_workspace #1c1c1c #1c1c1c #9c9c9c
         urgent_workspace   #ffffff #900000
     }
 }
 
 # System keybindings
-bindsym Mod4+u	exec urxvt -hold -e packer -Syu
-bindsym Mod4+c	exec urxvt -e vim ~/.i3/config
-bindsym Mod4+i	exec urxvt -e weechat-curses
-bindsym Control+$mod+Delete exec urxvt -e htop
-bindsym Control+$mod+l exec  i3lock -c 000000
+bindsym Mod4+u			exec termite --class=packer-color --hold -e "packer-color -Syu"
+bindsym Mod4+c			exec termite --class=vimdev -e "vim /home/cippaciong/.i3/config"
+bindsym Control+$mod+Delete	exec termite -e "htop"
+bindsym Control+$mod+l		exec  i3lock -c 000000
 
-#Audio keybindings
-bindsym  XF86AudioMute exec  "amixer set Speaker 0"
-bindsym  Mod4+Prior	exec "amixer set Speaker 5+"
-bindsym  Mod4+Next	exec "amixer set Speaker 5-"
-bindsym  Mod4+Home	exec "ncmpcpp prev"
-bindsym  Mod4+End	exec "ncmpcpp next"
+#Multimedia keybindings
+bindsym Mod4+p			exec termite --class=ncmpcpp -e "ncmpcpp"
+bindsym  Mod4+Prior		exec "amixer set Speaker 5+"
+bindsym  Mod4+Next		exec "amixer set Speaker 5-"
+bindsym  Mod4+Home		exec "ncmpcpp prev"
+bindsym  Mod4+End		exec "ncmpcpp next"
+bindsym  Control+$mod+space	exec "ncmpcpp toggle"
+
 
 # Internet keybindings
-bindsym Mod4+w	exec firefox
-bindsym Mod4+h	exec firefox --private
-bindsym Mod4+m	exec firefox https://mail.google.com/mail/#inbox 
-bindsym Mod4+r	exec firefox http://www.google.it/reader/view/?hl=it&tab=my
-
+bindsym Mod4+w			exec firefox
+bindsym Mod4+h			exec firefox --private
+bindsym Mod4+m			exec firefox https://mail.google.com/mail/#inbox 
+bindsym Mod4+r			exec firefox http://www.google.it/reader/view/?hl=it&tab=my
+bindsym Mod4+i			exec termite --class=weechat -e "weechat-curses"
+bindsym Mod4+t			exec termite --class=rtorrent -e "rtorrent"
 
 # Misc keybindings
-bindsym Mod4+f	exec thunar
-bindsym Mod4+p	exec urxvt -e ncmpcpp
-bindsym Print	exec scrot -d5
+bindsym Mod4+f			exec thunar
+bindsym Print			exec scrot -d5
 
 #assign application to workspace
-assign [class="^URxvt$" title="^ncmpcpp$"] → 5:srv
 assign [class="Firefox"] → 1:www
+assign [class="^packer-color$"] → 2:dev
+assign [class="^vimdev$"] → 2:dev
 assign [class="Thunar"] → 3:file
 assign [class="Skype"] → 4:chat
-assign [class="Gimp"] → 6:gui
+assign [class="^weechat$"] → 4:chat
+assign [class="^rtorrent$"] → 5:srv
+assign [class="^ncmpcpp$"] → 5:srv
+assign [class="^Gimp$"] → 6:gui
+assign [class="^Gpartedbin$"] → 6:gui
 assign [class="VirtualBox"] → 6:gui
-assign [class="^URxvt$" title="^packer$"] → 2:dev
-#assign [class="Zathura"] → 5: off
 assign [class="libreoffice-writer"] → 6:gui
+
+# Define floating windows
+for_window [title="Avanzamento delle operazione sui file"] floating enable
+
