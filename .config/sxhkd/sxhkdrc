@@ -134,6 +134,7 @@ super + ctrl + h
 super + ctrl + l
     bspc presel right
 
+
 super + ctrl + k
     bspc presel up
 
@@ -296,21 +297,78 @@ super + shift + 9
 super + shift + 0
     bspc send_to Ten
 
-#
-# wm independent hotkeys
-#
+###################
+## MOUSE HOTKEYS ##
+###################
 
-super + ctrl + t
+super + button{1,2,3}
+    bspc grab_pointer {move,focus,resize}
+
+super + alt + button{1,3}
+    bspc grab_pointer {move_tiled,resize_tiled}
+
+super + alt + !button{1,3}
+    bspc {track_pointer,track_pointer} %i %i
+
+super + !button{1,3}
+    bspc {track_pointer,track_pointer} %i %i
+
+super + @button{1,3}
+    bspc {ungrab_pointer,ungrab_pointer}
+
+super + button{4,5}
+    bspc rotate {clockwise,counter_clockwise}
+
+super + button{6,7}
+    bspc circulate {backward,forward}
+
+super + button8
+    bspc toggle_visibility
+
+#############################################################
+####				wm independent hotkeys 				 ####
+#############################################################
+
+
+alt + Return
     termite
+
+ctrl + alt + l
+	slock
+
+super + alt + u
+	termite --class=Upgrade --hold -e "packer-color -Syu"
 
 super + ctrl + shift + slash
     urxvtc -cd "$HOME/incoming"
 
 super + space
-    dmenu_run
+    dmenu_run -fn "Droid Sans-9" -nb "#1C1C1C" -nf "#71757F" -sb "#1C1C1C" -sf "#0DAAFF" -p 'run' -i #-b
 
-super + ctrl + comma
-    focus_or_run dwb
+super + alt + w
+#    focus_or_run dwb
+	firefox
+
+super + alt + m
+	firefox https://mail.google.com/mail/?shva=1#inbox
+
+super + alt + r
+	firefox http://www.google.it/reader/view/
+
+super + alt + shift + R
+	firefox https://www.rememberthemilk.com
+
+super + alt + f
+	thunar
+
+super + alt + i
+	termite --class=Weechat -e weechat-curses
+
+super + alt + t
+	termite --class=Rtorrent -e rtorrent
+
+super + alt + p
+	termite --class=Ncmpcpp -e ncmpcpp
 
 super + ctrl + shift + comma
     focus_or_run dwb_restore
@@ -339,26 +397,14 @@ super + ctrl + c
 super + shift + ctrl + c
     focus_or_run sxhkd_config
 
-MonBrightnessDown
-    dbright -1
-
-MonBrightnessUp
-    dbright +1
-
-shift + MonBrightnessDown
-    dbright -10
-
-shift + MonBrightnessUp
-    dbright +10
-
 AudioMute
     dvol toggle
 
-AudioLowerVolume
-    dvol lower
+super + Next
+    $BSPWM_SCRIPTS/dvol lower
 
-AudioRaiseVolume
-    dvol raise
+super + Prior
+    $BSPWM_SCRIPTS/dvol raise
 
 shift + AudioLowerVolume
     dvol strong_lower
@@ -395,24 +441,6 @@ super + alt + 8
 
 super + alt + 9
     mpc -q seek 90%
-
-AudioPrev
-    mpc -q prev
-
-AudioNext
-    mpc -q next
-
-AudioPlay
-    mpc -q toggle
-
-super + ctrl + AudioPlay
-    mpc load radios
-
-super + AudioPrev
-    mpc seek -1
-
-super + AudioNext
-    mpc seek +1
 
 super + AudioPlay
     focus_or_run ncmpcpp

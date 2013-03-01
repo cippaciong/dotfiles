@@ -1,33 +1,51 @@
-#! /bin/bash
+#! /bin/dash
 
-dzen2 &
-bspc rename Desktop01 One
-bspc add Two Three Four Five Six Seven Eight Nine Ten
-bspc layout monocle One Two Three Four Five Six Seven Eight Nine Ten
+FIRST_DESK=One
+REMAINING_DESKS='Two Three Four Five Six Seven Eight Nine Ten'
+bspc rename Desktop01 $FIRST_DESK
+bspc add $REMAINING_DESKS
+#bspc layout monocle $FIRST_DESK $REMAINING_DESKS
 
-bspc rule Gimp Eight floating
-bspc rule Inkscape Seven floating
-bspc rule fontforge floating
-bspc rule Download floating
-# bspc rule processing-app-Base floating
+# WWW
+bspc rule Firefox One
 
-bspc set outer_border_width 3
-bspc set main_border_width 1
-bspc set inner_border_width 3
-bspc set window_gap 6
-bspc set top_padding 24
+# DEV
+bspc rule Upgrade Two
+
+# FILE
+bspc rule Geeqie Three floating
+bspc rule Thunar Three
+
+# CHAT
+bspc rule Weechat Four
+bspc rule Skype Four
+
+# VAR
+bspc rule Ncmpcpp Five
+bspc rule Rtorrent Five
+
+# GUI
+bspc rule Gimp Six floating
+bspc rule Inkscape Six floating
+
+bspc set border_width 2
+bspc set window_gap 10
+bspc set bottom_padding 20
+
+#COLORS
+bspc set focused_border_color "#0DABFF"
 
 bspc set borderless_monocle true
 bspc set gapless_monocle true
-bspc set focus_follows_mouse true
+bspc set focus_follows_pointer true
 bspc set adaptative_raise true
+#bspc set apply_shadow_property true
 
 if [ -e "$BSPWM_BACKUP" ] ; then
-    bspc restore "$BSPWM_BACKUP"
-    rm "$BSPWM_BACKUP"
+	bspc restore "$BSPWM_BACKUP"
+	rm "$BSPWM_BACKUP"
 else
-    bspc adopt_orphans
+	bspc adopt_orphans
 fi
 
-updatethm
-# compton --respect-attr-shadow -bc -t -8 -l -9 -r 6 -o 0.7
+pgrep -x compton > /dev/null || compton --respect-prop-shadow -bc -t -8 -l -9 -r 6 -o 0.7
