@@ -1,4 +1,3 @@
-Arch-i3
+dotfiles
 =======
-
-Dotfiles for Arch+i3wm on Desktop
+Config files I use for Arch
