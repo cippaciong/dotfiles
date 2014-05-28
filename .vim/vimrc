@@ -1,6 +1,57 @@
-" Basics configuration
+""" Vundle.vim """
 filetype off			" Required by vundle
 set nocompatible 		" Required by vundle (Be iMproved)
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-scripts/ctags.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mattn/emmet-vim'
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype on
+" Put your non-Plugin stuff after this line
+
+" Enable Omnicompletion
+set omnifunc=syntaxcomplete#Complete
+
+"if has("autocmd") && exists("+omnifunc")
+"autocmd Filetype *
+"    \   if &omnifunc == "" |
+"    \   setlocal omnifunc=syntaxcomplete#Complete |
+"    \   endif
+"endif
+
+" Basics configuration
 syntax on
 set encoding=utf-8
 "set spell spellang=en_us	" Set spell checking
@@ -15,17 +66,12 @@ set shiftwidth=4
 set smarttab  			" Improves tabbing
 set expandtab			" Insert space characters whenever the tab key is pressed
 set laststatus=2  		" Statusbar always visible for Powerline
-set noshowmode 			" Hide the default mode text (e.g. -- INSERT -- below the statusline)
+"set noshowmode 			" Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set pastetoggle=<F2>	" Better pasting from external sources
-
-" Aesthetics
-colorscheme solarized
-set background=dark
 
 " Mappings and shortcuts
 " Basics
-inoremap jj <ESC>  
-
+inoremap jk <ESC>  
 
 " Control shortcuts
 nnoremap <C-h> <C-w>h
@@ -45,52 +91,18 @@ vnoremap <down> <nop>
 vnoremap <left> <nop>
 vnoremap <right> <nop> 
 
+" Autoclose html tags with a space
+"iabbrev </ </<C-X><C-O>
+
+" Aesthetics
+colorscheme solarized
+set background=dark
+
+" Add empty lines without entering insert mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 " Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
-""" Vundle """
-"set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
-
-" let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
-
-" The following are examples of different formats supported.
-" Keep bundle commands between here and filetype plugin indent on.
-" scripts on GitHub repos
-Bundle 'altercation/vim-colors-solarized'
-"Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'tpope/vim-rails.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" scripts from http://vim-scripts.org/vim/scripts.html
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-" scripts not on GitHub
-"Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///home/gmarik/path/to/plugin'
-" ...
-
-filetype plugin indent on	" Required by vundle
-"
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
-
-""" End Vundle """
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
