@@ -21,6 +21,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mattn/emmet-vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin  'Lokaltog/vim-powerline'
 "Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -66,12 +67,16 @@ set shiftwidth=4
 set smarttab  			" Improves tabbing
 set expandtab			" Insert space characters whenever the tab key is pressed
 set laststatus=2  		" Statusbar always visible for Powerline
+set colorcolumn=90
 "set noshowmode 			" Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set pastetoggle=<F2>	" Better pasting from external sources
 
 " Mappings and shortcuts
 " Basics
 inoremap jk <ESC>  
+
+" Leader
+let mapleader = " "
 
 " Control shortcuts
 nnoremap <C-h> <C-w>h
