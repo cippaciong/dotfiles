@@ -1,0 +1,36 @@
+#! /bin/sh
+
+bspc config border_width        2
+bspc config window_gap         12
+
+bspc config split_ratio         0.52
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_by_distance   true
+
+bspc config focus_follows_pointer true
+bspc config auto_alternate true
+
+# Colors
+bspc config focused_border_color   "#FF8C00"
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc rule -a Firefox desktop=^1
+bspc rule -a Ranger desktop=^3
+bspc rule -a Telegram desktop=^4
+bspc rule -a Irc desktop=^4
+bspc rule -a Thunderbird desktop=^5
+bspc rule -a MuPDF desktop=^6
+bspc rule -a Gimp desktop=^6
+bspc rule -a Inkscape desktop=^6
+bspc rule -a Gmusicbrowser desktop=^7
+bspc rule -a Upgrade desktop=^9 follow=on
+bspc rule -a Remmina desktop=^9
+bspc rule -a mpv floating=on
+bspc rule -a Galculator floating=on
+bspc rule -a Gpick floating=on
+
+setxkbmap it -option ctrl:swapcaps &
+compton -cCG -o 0.15 -O 0.15 -r 10 -D2 &
+panel &
