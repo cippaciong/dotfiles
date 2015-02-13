@@ -14,20 +14,31 @@ fi
 #Load urxvt settings
 xrdb -merge ~/.Xresources
 
-#Define custom terminal for i3-sensible-terminal
-export TERMINAL=termite
-
-#Define default browser for termite and others
-export BROWSER=firefox
-
 #Fix QGtkStyle theme detection 
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+#export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+# Fix cursor displayed as an X
+xsetroot -cursor_name left_ptr
+
+# start lxpolkit
+lxpolkit &
+
+# Load fonts
+xset +fp /usr/share/fonts/local
+xset fp rehash
 
 #Set Wallpaper
 sh ~/.fehbg &
 
-#sxhkd
+sxhkd &
+
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+# Fix blank GUI in Java apps
+#https://bbs.archlinux.org/viewtopic.php?pid=1067489#p1067489
+wmname LG3D
 
 #Launch Windows Manager
-exec i3
-#exec bspwm
+#exec i3
+exec bspwm
