@@ -1,82 +1,55 @@
 """ Vundle.vim """
-filetype off			" Required by vundle
-set nocompatible 		" Required by vundle (Be iMproved)
+filetype off			        " required by vundle
+set nocompatible 		        " required by vundle (Be iMproved)
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/ctags.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mattn/emmet-vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin  'Lokaltog/vim-powerline'
-"Plugin 'tpope/vim-fugitive'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'vitalk/vim-simple-todo'
 " plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+Plugin 'colorsupport.vim'
+" Plugin 'xoria256.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype on
-" Put your non-Plugin stuff after this line
+call vundle#end()               " required by vundle
+filetype plugin indent on       " required
 
-" Enable Omnicompletion
-set omnifunc=syntaxcomplete#Complete
-
-"if has("autocmd") && exists("+omnifunc")
-"autocmd Filetype *
-"    \   if &omnifunc == "" |
-"    \   setlocal omnifunc=syntaxcomplete#Complete |
-"    \   endif
-"endif
-
-" Basics configuration
+" Basic configuration
 syntax on
-set encoding=utf-8
-"set spell spellang=en_us	" Set spell checking
-set number  			" Display line numbers
-set showmatch 			" Highlights matching brackets
-set autoindent  		" If you're indented, new lines will also be indented
-set smartindent  		" Automatically indents lines after opening a bracket
-"set backspace=2  		" This makes the backspace key function like it does in other programs.
-set tabstop=4  			" How much space Vim gives to a tab
+set backspace=indent,eol,start  " make backspace behave in a sane manner.
+set encoding=utf-8              " set encoding
+set number                      " display line numbers
+set showmatch                   " highlights matching brackets
+set autoindent                  " if you're indented, new lines will also be indented
+set smartindent                 " automatically indents lines after opening a bracket
+set tabstop=4                   " how much space Vim gives to a tab
 set shiftwidth=4
-"set softtabstop=4
-set smarttab  			" Improves tabbing
-set expandtab			" Insert space characters whenever the tab key is pressed
-set laststatus=2  		" Statusbar always visible for Powerline
-set colorcolumn=90
-"set noshowmode 			" Hide the default mode text (e.g. -- INSERT -- below the statusline)
-set pastetoggle=<F2>	" Better pasting from external sources
+set smarttab                    " improves tabbing
+set expandtab                   " insert space characters whenever the tab key is pressed
+set laststatus=2                " statusbar always visible for Powerline
+set pastetoggle=<F2>            " better pasting from external sources
+
+" Change the Leader key to space
+let mapleader=" "
 
 " Mappings and shortcuts
 " Basics
 inoremap jk <ESC>  
-
-" Leader
-let mapleader = " "
 
 " Control shortcuts
 nnoremap <C-h> <C-w>h
@@ -96,18 +69,15 @@ vnoremap <down> <nop>
 vnoremap <left> <nop>
 vnoremap <right> <nop> 
 
-" Autoclose html tags with a space
-"iabbrev </ </<C-X><C-O>
-
 " Aesthetics
-colorscheme solarized
-set background=dark
+colorscheme getfresh
 
 " Add empty lines without entering insert mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-" Powerline
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+" highlight the status bar when in insert mode
+if version >= 700
+    au InsertLeave * hi StatusLine ctermfg=235 ctermbg=2
+    au InsertEnter * hi StatusLine ctermbg=240 ctermfg=12
+endif
