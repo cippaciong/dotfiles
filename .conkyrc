@@ -1,0 +1,14 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 1.0
+total_run_times 0
+use_spacer none
+if_up_strictness address
+
+TEXT
+S%{F\#FFB6CD42} ${cpu}%%  \
+%{F\#FF66A9BA} ${mem}  \
+%{F\#FFFDA53C} ${if_up enp2s0}Ethernet: connected  ${endif}${if_up wlp3s0}Wireless: connected  ${endif}\
+%{F\#FF6D868C} ${battery}  \
+%{F\#FFE74F4F} ${time %H:%M - %d %b %Y}
