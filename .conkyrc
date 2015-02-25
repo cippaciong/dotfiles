@@ -1,0 +1,42 @@
+## Conky config i3; dkeg; 2013 ## 
+
+#out_to_x no
+#own_window no
+out_to_console yes
+background no
+max_text_width 0
+update_interval 2.0
+total_run_times 0
+short_units yes
+if_up_strictness address
+use_spacer left
+#override_utf8_locale no
+# set to 1 to disable averaging
+cpu_avg_samples 4
+#border_inner_margin 0
+#border_outer_margin 0
+
+TEXT
+[
+{"full_text":"","color":"\#0D5174","separator":false,"separator_block_width":3},\
+{"full_text":"","color":"\#FFFFFF","separator":false,"separator_block_width":10},\
+{"full_text":"${cpu}%","color":${if_match ${cpu}>75}"\#cc5555"${else}"\#eeeeee"${endif},"separator":false,"separator_block_width":10},\
+\
+{"full_text":"","color":"\#0D5174","separator":false,"separator_block_width":3},\
+{"full_text":"","color":"\#FFFFFF","separator":false,"separator_block_width":10},\
+{"full_text":"${mem}","color":${if_match ${memperc}>50}"\#cc5555"${else}"\#eeeeee"${endif},"separator":false,"separator_block_width":10},\
+\
+{"full_text":"","color":"\#0D5174","separator":false,"separator_block_width":3},\
+{"full_text":"","color":"\#FFFFFF","separator":false,"separator_block_width":10},\
+{"full_text":"${battery}","color":${if_match ${battery_percent}<50}"\#cb4b16"${else}"\#eeeeee"${endif},"separator":false,"separator_block_width":10},\
+\
+{"full_text":"","color":"\#0D5174","separator":false,"separator_block_width":3},\
+{"full_text":"","color":"\#FFFFFF","separator":false,"separator_block_width":10},\
+{"full_text":"${if_mixer_mute}M${else}${mixer}${endif}","color":"\#eeeeee","separator":false,"separator_block_width":10},\
+\
+{"full_text":"","color":"\#0D5174","separator":false,"separator_block_width":3},\
+{"full_text":"","color":"\#FFFFFF","separator":false,"separator_block_width":10},\
+{"full_text":"${time %a %d/%m}","color":"\#eeeeee","separator":false,"separator_block_width":10},\
+{"full_text":"${time %H:%M}","color":"\#eeeeee"}\
+],
+
