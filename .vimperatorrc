@@ -1,10 +1,19 @@
-set defsearch=duckduckgo
+"3.5 (created: 2012/08/04 00:41:20)
 
-"colorscheme cippaciong
+source! /home/cippaciong/.vimperatorrc.local
 
-set showstatuslinks=2
+" vim: set ft=vimperator:
 
-map <C-Right> :tabmove! +1<CR>
-map <C-Left> :tabmove! -1<CR>
+set ds=duckduckgo
 map <S-Right> gt
 map <S-Left> gT
+map <S-K> gt
+map <S-J> gT
+
+""" FONTS """
+highlight CmdLine>* font-family: Droid Sans;
+highlight CmdOutput white-space: pre; font-family: Droid Sans;
+highlight CompItem>* height: 18px; min-height: 18px; padding: 0 0.5ex; font-family: Droid Sans;
+highlight StatusLine color: gray; background: transparent; font-weight: normal; font-family: Droid Sans;
+style -name=yourUglyStatusline * #liberator-statusline { font-family: Droid Sans !important; }
+
