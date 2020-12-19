@@ -1,0 +1,35 @@
+[alias]
+    logtree = log --graph --all --oneline
+    logdiff = log -p -n
+    cleanbranch = remote update origin --prune
+    logline = log --oneline
+
+[commit]
+    template = ~/.gitmessage
+
+[core]
+    pager = delta
+    editor = nvim
+    excludesfile = ~/.gitignore
+
+[diff]
+    tool = vimdiff
+
+[user]
+    email = lacapannadelloziotom@gmail.com
+    name = Tommaso Sardelli
+
+[pull]
+    rebase = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
