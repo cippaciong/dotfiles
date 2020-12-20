@@ -5,8 +5,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Autocompletion and LSP
-Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP support
-Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}    " Elixir extention for coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                         " LSP support
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}    " Elixir extension for coc.nvim
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}      " JSON extension for coc.nvim
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}      " YAML extension for coc.nvim
 
 " Editing
 Plug 'preservim/nerdcommenter'                          " Easily comment code
@@ -139,9 +141,10 @@ let g:vimtex_quickfix_latexlog = {'default' : 0}
 
 
 """ Utilsnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-b>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 """ NERDTree
