@@ -29,6 +29,7 @@ Plug 'wincent/loupe'                                    " Syntax highlighting fo
 """ Languages
 Plug 'elixir-editors/vim-elixir'                        " Elixir
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }     " Go
+Plug 'towolf/vim-helm'                                  " Helm
 Plug 'google/vim-jsonnet'                               " Jsonnet
 Plug 'lervag/vimtex'                                    " LaTeX
 Plug 'hashivim/vim-terraform'                           " Terraform
@@ -37,7 +38,7 @@ Plug 'hashivim/vim-terraform'                           " Terraform
 Plug '/usr/share/vim/vimfiles/plugin'                   " Load fzf
 Plug 'junegunn/fzf.vim'                                 " fzf integration
 Plug 'easymotion/vim-easymotion'                        " Easier vim navigation across text
-Plug 'preservim/nerdtree'                               " Tree file explorer
+Plug 'preservim/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' " Tree file explorer
 Plug 'preservim/tagbar', { 'do': ':helptags' }          " Sidebar for code navigation
 Plug 'tpope/vim-unimpaired'                             " Handy bracket mappings
 Plug 'tpope/vim-repeat'                                 " Enable repeating supported plugin maps with '.'
@@ -84,6 +85,10 @@ set pastetoggle=<F2>
 " Enable mouse support
 set mouse=a
 
+" Set a global python interprete to have pynvim available in per-project
+" virtualenvs. See 'PYTHON VIRTUALENVS" in :h provider-python
+let g:python3_host_prog = '/usr/bin/python'
+
 " Colorscheme
 "let base16colorspace=256  " Access colors present in 256 colorspace
 if $TERM =~ '^\(rxvt\|screen\|interix\|putty\)\(-.*\)\?$'
@@ -102,6 +107,7 @@ elseif $TERM =~ '^\(xterm\)\(-.*\)\?$'
     endif
 endif
 colorscheme nord
+
 " Custom search highlighting
 hi Search ctermfg=18 ctermbg=3 guifg=#B48EAD guibg=NONE gui=bold,underline
 
@@ -181,6 +187,7 @@ nnoremap <leader>d :bp\|bd #<CR>
 " fzf
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>a :Ag<CR>
 nnoremap <leader>A :Agi<CR>
 nnoremap <leader>h :History<CR>

@@ -70,8 +70,8 @@ function prompt() {
 PROMPT_COMMAND=prompt
 
 ####### ALIAS & EXPORT #######
-if [ -f ~/.shell_aliases ]; then
-    . ~/.shell_aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 eval $(dircolors ~/.dircolors)
@@ -96,7 +96,10 @@ export npm_config_prefix="$HOME/.node_modules"
 export PATH="$PATH:$npm_config_prefix/bin"
 
 # Terraform12
-#export PATH="/opt/terraform12:$PATH"
+# export PATH="/opt/terraform12:$PATH"
+
+# Terraform13
+# export PATH="/opt/terraform13:$PATH"
 
 # fzf
 # <CTRL+T> list files+folders in current directory (e.g., git commit <CTRL+T>, select a few files using <TAB>, finally <Return>)
@@ -105,19 +108,12 @@ export PATH="$PATH:$npm_config_prefix/bin"
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
-# TheFuck
-eval $(thefuck --alias)
-
 # Kubectl bash completion
 source <(kubectl completion bash)
+complete -F __start_kubectl k
 
 # Kustomize bash completion
 complete -C /usr/bin/kustomize kustomize
-
-# Kubectl aliases
-[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
-
-export BAT_THEME=base16
 
 # Don't escape $ during path tab completion
 # https://askubuntu.com/questions/70750/how-to-get-bash-to-stop-escaping-during-tab-completion

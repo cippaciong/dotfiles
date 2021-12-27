@@ -1,11 +1,9 @@
 {
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
+    "python": {
+        "jediEnabled": false,
+        "formatting" : {
+            "provider": "black",
+            "blackPath": "/usr/bin/black"
+        }
     }
-  },
-
-  "python.jediEnabled": false
 }
