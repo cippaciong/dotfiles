@@ -3,6 +3,7 @@
     logdiff = log -p -n
     cleanbranch = remote update origin --prune
     logline = log --oneline
+    datecommit = !git commit -m \"$(date '+%Y-%m-%d %H:%M')\"
 
 [commit]
     template = ~/.gitmessage
