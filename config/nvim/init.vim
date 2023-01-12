@@ -6,21 +6,19 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Autocompletion and LSP
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                         " LSP support
-Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}    " Elixir extension for coc.nvim
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}      " JSON extension for coc.nvim
-Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}      " YAML extension for coc.nvim
 
 " Editing
 Plug 'preservim/nerdcommenter'                          " Easily comment code
 Plug 'tpope/vim-surround'                               " Easily surround text blocks
+Plug 'tpope/vim-fugitive'                               " Git integration
 
 " Folding
 Plug 'Konfekt/FastFold'                                 " Faster folding engine
 Plug 'tmhedberg/SimpylFold'                             " Python folding
-Plug 'matze/vim-tex-fold'                               " LaTeX folding
 
 " Interface
 Plug 'arcticicestudio/nord-vim'                         " Nord theme
+Plug 'airblade/vim-gitgutter'                           " Shows git diff markers in the sign column
 Plug 'blueyed/vim-diminactive'                          " Dim inactive windows
 Plug 'vim-airline/vim-airline'                          " Airline statusbar
 Plug 'vim-airline/vim-airline-themes'                   " Airline themes
@@ -28,10 +26,9 @@ Plug 'wincent/loupe'                                    " Syntax highlighting fo
 
 """ Languages
 Plug 'elixir-editors/vim-elixir'                        " Elixir
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }     " Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }      " Go
 Plug 'towolf/vim-helm'                                  " Helm
 Plug 'google/vim-jsonnet'                               " Jsonnet
-Plug 'lervag/vimtex'                                    " LaTeX
 Plug 'hashivim/vim-terraform'                           " Terraform
 
 " Navigation
@@ -39,7 +36,7 @@ Plug '/usr/share/vim/vimfiles/plugin'                   " Load fzf
 Plug 'junegunn/fzf.vim'                                 " fzf integration
 Plug 'easymotion/vim-easymotion'                        " Easier vim navigation across text
 Plug 'preservim/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' " Tree file explorer
-Plug 'preservim/tagbar', { 'do': ':helptags' }          " Sidebar for code navigation
+Plug 'preservim/tagbar'                                 " Sidebar for code navigation
 Plug 'tpope/vim-unimpaired'                             " Handy bracket mappings
 Plug 'tpope/vim-repeat'                                 " Enable repeating supported plugin maps with '.'
 
@@ -117,18 +114,16 @@ hi Search ctermfg=18 ctermbg=3 guifg=#B48EAD guibg=NONE gui=bold,underline
 
 """ vim-go
 " Enable additional vim-go syntax highlighting
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_extra_types = 1
 " Enable highlighting of variables that are the same (disabled to save battery)
 " WARN: This two options might cause battery drain and slow down vim if enabled
-let g:go_fmt_command = "goimports"
-let g:go_auto_sameids = 0
-let g:go_auto_type_info = 0
-
+" let g:go_fmt_command = "gopls"
+" let g:go_debug=['lsp']
 
 """ Terraform
 let g:terraform_align=1
@@ -183,6 +178,8 @@ let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite', 'quickfix', 'help']
 
 " Close buffer without closing split
 nnoremap <leader>d :bp\|bd #<CR>
+" Close the current window
+nnoremap <Leader>,c :close<CR>
 
 " fzf
 nnoremap <leader>b :Buffers<CR>
@@ -201,9 +198,6 @@ nnoremap <leader>tsg :TSDef<CR>
 " vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>t <Plug>(go-test)
-
-" Clear the search highlighting
-nnoremap <Leader>c :nohlsearch<CR>
 
 " Easier split navigations
 " Instead of ctrl-w then j, it’s just ctrl-j
