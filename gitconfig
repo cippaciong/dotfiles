@@ -1,5 +1,5 @@
 [alias]
-    logtree = log --graph --all --oneline
+    logtree = log --graph --all --pretty=format:'%C(yellow)%h %C(auto)%d %Creset%s %Cblue%an %Cgreen%ad' --date=short
     logdiff = log -p -n
     cleanbranch = remote update origin --prune
     logline = log --oneline
