@@ -3,7 +3,13 @@
     logdiff = log -p -n
     cleanbranch = remote update origin --prune
     logline = log --oneline
+    fixup = "!git commit -m 'fix' && git rebase -i HEAD~\"$((${1}+1))\" #"
+    gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
+    remaster = ! git switch master && git pull && git gone
+    remain = ! git switch main && git pull && git gone
+    pfwl = push --force-with-lease
     datecommit = !git commit -m \"$(date '+%Y-%m-%d %H:%M')\"
+    oopsie = commit --amend --no-edit
 
 [commit]
     template = ~/.gitmessage
