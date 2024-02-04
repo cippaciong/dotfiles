@@ -51,23 +51,24 @@ BMAG="\[\033[0;45m\]"   # background magenta
 BCYN="\[\033[0;46m\]"   # background cyan
 BWHT="\[\033[0;47m\]"   # background white
 
-#PS1="$FBLE┌─ $HC$FGRN\u $HC$FWHT[\w]\n$RS$FBLE└─ $FWHT"
+PS1="$FBLE┌─ $HC$FGRN\u $HC$FWHT[\w]\n$RS$FBLE└─ $FWHT"
 
-function prompt_right() {
-  context="$(kubectl config current-context | cut -d '/' -f 2)"
-  echo -e "$FYEL[$context]$RS"
-}
+###### KUBERNETES CLUSTER PROMPT ######
+# function prompt_right() {
+#   # context="$(kubectl config current-context | cut -d '/' -f 2)"
+#   context=" "
+#   echo -e "$FYEL[$context]$RS"
+# }
 
-function prompt_left() {
-  echo -e "$FBLE┌─ $FGRN\\\t $HC$FWHT[\w]"
-}
+# function prompt_left() {
+#   echo -e "$FBLE┌─ $FGRN\\\t $HC$FWHT[\w]"
+# }
 
-function prompt() {
-    compensate=19
-    PS1=$(printf "%*s\r%s\n\[\033[0;34m\]└─ $FWHT\\\$ " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
-}
-
-PROMPT_COMMAND=prompt
+# function prompt() {
+#     compensate=19
+#     PS1=$(printf "%*s\r%s\n\[\033[0;34m\]└─ $FWHT\\\$ " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
+# }
+# PROMPT_COMMAND=prompt
 
 ####### ALIAS & EXPORT #######
 if [ -f ~/.bash_aliases ]; then
