@@ -330,5 +330,3 @@ for_window [class="^jetbrains-.+"][window_type=dialog] focus
 # Autostart
 exec --no-startup-id nm-applet
 exec --no-startup-id copyq
-exec --no-startup-id dockd --daemon
-exec --no-startup-id smoothify
