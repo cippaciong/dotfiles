@@ -13,5 +13,10 @@ local plugins = {
       require "custom.configs.vim-crystal"
     end,
   },
+
+  {
+    "terrastruct/d2-vim",
+    ft = "d2",
+  },
 }
 return plugins
