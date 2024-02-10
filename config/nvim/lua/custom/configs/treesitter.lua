@@ -6,6 +6,7 @@ local options = {
     "javascript",
     "json",
     "lua",
+    "markdown",
     "python",
     "ruby",
     "typescript",
