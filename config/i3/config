@@ -307,7 +307,7 @@ assign [class="Lxappearance"] → $ws6
 assign [class="Quake3-UrT.x86_64"] → $ws6
 
 assign [title="music"] → $ws7
-for_window [class="Spotify"] move to workspace $ws7
+assign [class="Spotify"] → $ws7
 
 assign [class="ssh"] → $ws8
 
@@ -316,7 +316,6 @@ assign [class="Bitwarden"] → $ws9
 assign [class="obsidian"] → $ws9
 
 # Define floating windows
-#for_window [title="HTTP Upload"] floating disable
 for_window [title="Avanzamento delle operazione sui file"] floating enable
 for_window [class="Lxpolkit"] floating enable
 for_window [class="Galculator"] floating enable
