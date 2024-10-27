@@ -33,6 +33,9 @@ export BAT_THEME=base16
 # IEx history (https://www.adiiyengar.com/blog/20180503/iex-shell-history)
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
 
+# rbenv (added by `rbenv init`)
+eval "$(rbenv init - --no-rehash bash)"
+
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
