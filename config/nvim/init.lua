@@ -91,7 +91,6 @@ vim.opt.autowrite = true           -- Automatically save before :next, :make etc
 -- vim.opt.autochdir = true           -- Change CWD when I open a file
 
 vim.opt.mouse = 'a'                -- Enable mouse support
--- vim.opt.clipboard = 'unnamedplus'  -- Copy/paste to system clipboard
 vim.opt.swapfile = false           -- Don't use swapfile
 vim.opt.ignorecase = true          -- Search case insensitive...
 vim.opt.smartcase = true           -- ... but not it begins with upper case
@@ -139,3 +138,9 @@ vim.keymap.set('n', '<Leader><space>', ':nohlsearch<CR>')
 -- search will center on the line it's found in.
 vim.keymap.set('n', 'n', 'nzzzv', {noremap = true})
 vim.keymap.set('n', 'N', 'Nzzzv', {noremap = true})
+
+-- Split navigation mappings: instead of ctrl-w then j, it’s just ctrl-j
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
