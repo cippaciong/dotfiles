@@ -170,6 +170,49 @@ require('lazy').setup({
         })
       end,
     },
+
+    -- fzf extension for telescope with better speed
+    {
+      "nvim-telescope/telescope-fzf-native.nvim", build = 'make'
+    },
+
+    -- Sets vim.ui.select to telescope.
+    -- That means for example that neovim core stuff can fill the telescope picker
+    {'nvim-telescope/telescope-ui-select.nvim' },
+
+    -- Fuzzy finder framework.
+    -- See keybindings in the configuration section at the end of the file
+    {
+      "nvim-telescope/telescope.nvim",
+      branch = '0.1.x',
+      dependencies = {
+        "nvim-lua/plenary.nvim" ,
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons",
+      },
+      config = function ()
+        require("telescope").setup({
+          extensions = {
+            fzf = {
+              fuzzy = true,                    -- false will only do exact matching
+              override_generic_sorter = true,  -- override the generic sorter
+              override_file_sorter = true,     -- override the file sorter
+              case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                               -- the default case_mode is "smart_case"
+            }
+          }
+        })
+
+        -- To get fzf loaded and working with telescope, you need to call
+        -- load_extension, somewhere after setup function:
+        require('telescope').load_extension('fzf')
+
+        -- To get ui-select loaded and working with telescope, you need to call
+        -- load_extension, somewhere after setup function:
+        require("telescope").load_extension("ui-select")
+      end,
+    },
+
   },
 
   -- Colorscheme that will be used when installing plugins. That happens before startup,
@@ -251,3 +294,12 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+-- Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search code (live grep)' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
+vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search document symbols' })
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
