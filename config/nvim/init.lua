@@ -213,6 +213,20 @@ require('lazy').setup({
       end,
     },
 
+    -- Community-defined LSP settings and custom overrides
+    {
+      "neovim/nvim-lspconfig",
+      config = function ()
+        util = require "lspconfig/util"
+
+        local capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+        -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
+        require'lspconfig'.ruby_lsp.setup{}
+      end,
+    },
+
   },
 
   -- Colorscheme that will be used when installing plugins. That happens before startup,
@@ -303,3 +317,29 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search document symbols' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
+vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
+
+-- LSP mappings
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, opts)
+
+    vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
+    vim.keymap.set('n', '<leader>s', "<cmd>belowright split | lua vim.lsp.buf.definition()<CR>", opts)
+    vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, opts)
+  end,
+})
