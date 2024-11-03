@@ -83,25 +83,6 @@ stty -ixon
 # Load bashmarks
 source /usr/share/bashmarks/bashmarks.sh
 
-# Ruby
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-
-# Go
-export GOPATH="$HOME/.go"
-export PATH="$PATH:$GOPATH/bin"
-export GO111MODULE=auto
-
-# Nodejs / npm
-export npm_config_prefix="$HOME/.node_modules"
-export PATH="$PATH:$npm_config_prefix/bin"
-
-# Terraform12
-# export PATH="/opt/terraform12:$PATH"
-
-# Terraform13
-# export PATH="/opt/terraform13:$PATH"
-
 # fzf
 # <CTRL+T> list files+folders in current directory (e.g., git commit <CTRL+T>, select a few files using <TAB>, finally <Return>)
 # <CTRL+R> search history of shell commands
