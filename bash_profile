@@ -41,7 +41,7 @@ export PATH="$PATH:$GEM_HOME/bin"
 export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 
-# rbenv (added by `rbenv init`)
+# Initialize rbenv (added by `rbenv init`)
 eval "$(rbenv init - --no-rehash bash)"
 
 

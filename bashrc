@@ -97,6 +97,10 @@ complete -F __start_kubectl k
 # Kustomize bash completion
 complete -C /usr/bin/kustomize kustomize
 
+# Source again rbenv bash completion manually because for some reasons
+# it does't work automatically with rbenv init
+source '/usr/lib/rbenv/completions/rbenv.bash'
+
 # Don't escape $ during path tab completion
 # https://askubuntu.com/questions/70750/how-to-get-bash-to-stop-escaping-during-tab-completion
 shopt -s direxpand
