@@ -64,6 +64,29 @@ require('lazy').setup({
       end,
     },
 
+    -- Statusline
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      config = function ()
+        require("lualine").setup({
+          options = {
+            theme = 'nord',
+            component_separators = { left = '|', right = '|'},
+            section_separators = { left = '', right = ''},
+          },
+          sections = {
+            lualine_c = {
+              {
+                'buffers',
+                show_filename_only = false,
+              }
+            }
+          }
+        })
+      end,
+    },
+
     -- Highlight, edit, and navigate code
     {
       'nvim-treesitter/nvim-treesitter',
