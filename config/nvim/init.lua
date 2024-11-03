@@ -443,7 +443,7 @@ vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('i', 'jk', '<ESC>')
 
 -- Remove search highlight
-vim.keymap.set('n', '<Leader><space>', ':nohlsearch<CR>')
+vim.keymap.set('n', '<Leader>n', ':nohlsearch<CR>')
 
 -- Search mappings: These will make it so that going to the next one in a
 -- search will center on the line it's found in.
@@ -456,10 +456,18 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
+-- Buffer and windows management mappings
+vim.keymap.set('n', '<leader>d', '<cmd>bp|bd #<CR>') -- Close buffer without closing split
+vim.keymap.set('n', '<leader>c', '<cmd>close<CR>') -- Close the current window
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>') -- Go to next buffer
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>') -- Go to previous buffer
+
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search code (live grep)' })
+vim.keymap.set('n', '<leader>fg', builtin.grep_string, { desc = 'Search string in current directory' })
+vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
+vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search document symbols' })
@@ -483,7 +491,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, opts)
+    vim.keymap.set('n', '<leader><leader>f', vim.lsp.buf.format, opts)
 
     vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
     vim.keymap.set('n', '<leader>s', "<cmd>belowright split | lua vim.lsp.buf.definition()<CR>", opts)
