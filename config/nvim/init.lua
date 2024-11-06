@@ -470,7 +470,8 @@ vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'Search string in 
 vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
-vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search document symbols' })
+vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search symbols in current document' })
+vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Search symbols project-wide' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
 
