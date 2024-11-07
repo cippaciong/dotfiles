@@ -374,6 +374,25 @@ require('lazy').setup({
       end,
     },
 
+    -- Alternate between files, such as foo.go and foo_test.go
+    {
+      "rgroli/other.nvim",
+      config = function ()
+        require("other-nvim").setup({
+          -- Should the window show files which do not exist yet based on
+          -- pattern matching. Selecting the files will create the file.
+          showMissingFiles = false,
+          -- When a mapping requires an initial selection of the other file, this setting controls,
+          -- wether the selection should be remembered for the current user session.
+          rememberBuffers = false,
+          mappings = {
+            "rails",
+          },
+        })
+      end,
+    },
+
+  -- Add plugins above this line
   },
 
   -- Colorscheme that will be used when installing plugins. That happens before startup,
@@ -474,6 +493,10 @@ vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search
 vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Search symbols project-wide' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
+
+-- other.nvim
+vim.keymap.set('n', '<leader>fo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
+vim.keymap.set('n', '<leader>ft', '<cmd>Other test<CR>', { desc = 'Open associated test file for the currently active buffer' })
 
 -- LSP mappings
 -- Use LspAttach autocommand to only map the following keys
