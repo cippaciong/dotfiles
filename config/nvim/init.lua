@@ -487,8 +487,8 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<CR>') -- Go to previous buffer
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
-vim.keymap.set('n', '<leader>fg', builtin.grep_string, { desc = 'Search string in current directory' })
-vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
+vim.keymap.set('n', '<leader>fG', builtin.grep_string, { desc = 'Search string under cursor in current directory' })
 vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
