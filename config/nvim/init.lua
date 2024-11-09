@@ -392,6 +392,9 @@ require('lazy').setup({
       end,
     },
 
+    -- Jinja2 syntax (for Pelican)
+    { "lepture/vim-jinja" }
+
   -- Add plugins above this line
   },
 
