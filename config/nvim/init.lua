@@ -29,27 +29,6 @@ require('lazy').setup({
       end,
     },
 
-    -- Comment
-    {
-      "numToStr/Comment.nvim",
-      opts = {
-        -- LHS of toggle mappings in NORMAL mode
-        toggler = {
-          -- Line-comment toggle keymap
-          line = '<leader>cc',
-          -- Block-comment toggle keymap
-          block = '<leader>bc',
-        },
-        -- LHS of operator-pending mappings in NORMAL and VISUAL mode
-        opleader = {
-            ---Line-comment keymap
-            line = '<leader>cc',
-            ---Block-comment keymap
-            block = '<leader>bc',
-        },
-      }
-    },
-
     -- File explorer
     {
       "nvim-tree/nvim-tree.lua",
@@ -483,6 +462,10 @@ vim.keymap.set('n', '<leader>d', '<cmd>bp|bd #<CR>') -- Close buffer without clo
 vim.keymap.set('n', '<leader>c', '<cmd>close<CR>') -- Close the current window
 vim.keymap.set('n', ']b', '<cmd>bnext<CR>') -- Go to next buffer
 vim.keymap.set('n', '[b', '<cmd>bprevious<CR>') -- Go to previous buffer
+
+-- Builtin comments
+vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
+vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })
 
 -- Telescope
 local builtin = require('telescope.builtin')
