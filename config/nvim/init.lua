@@ -470,6 +470,7 @@ vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ i
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
+vim.keymap.set('n', '<leader>fF', builtin.git_files, { desc = 'Search git files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
 vim.keymap.set('n', '<leader>fG', builtin.grep_string, { desc = 'Search string under cursor in current directory' })
 vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
