@@ -374,6 +374,16 @@ require('lazy').setup({
       end,
     },
 
+    -- testing framework
+    {
+      "vim-test/vim-test",
+      config = function ()
+        vim.g['test#strategy'] = 'neovim'
+        vim.g['test#neovim#start_normal'] = '1'
+        vim.g['test#neovim#term_position'] = 'vert'
+      end,
+    },
+
     -- Jinja2 syntax (for Pelican)
     { "lepture/vim-jinja" }
 
@@ -483,6 +493,10 @@ vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search
 vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Search symbols project-wide' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
 vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
+
+-- vim-test
+vim.keymap.set('n', '<leader>tt', ':TestNearest -v<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tf', ':TestFile -v<CR>', { noremap = true, silent = true })
 
 -- other.nvim
 vim.keymap.set('n', '<leader>fo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
