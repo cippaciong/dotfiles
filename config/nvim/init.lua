@@ -361,10 +361,10 @@ require('lazy').setup({
       branch = "Fix-escape_cwd_patterns",
       config = function ()
         require("other-nvim").setup({
-          -- Should the window show files which do not exist yet based on
-          -- pattern matching. Selecting the files will create the file.
+          -- If enabled, the window shows files that do not exist yet, based on pattern matching.
+          -- Selecting a file will create it.
           showMissingFiles = false,
-          -- When a mapping requires an initial selection of the other file, this setting controls,
+          -- When a mapping requires an initial selection of the other file, this setting controls
           -- wether the selection should be remembered for the current user session.
           rememberBuffers = false,
           mappings = {
@@ -379,7 +379,6 @@ require('lazy').setup({
       "vim-test/vim-test",
       config = function ()
         vim.g['test#strategy'] = 'neovim'
-        vim.g['test#neovim#start_normal'] = '1'
         vim.g['test#neovim#term_position'] = 'vert'
       end,
     },
