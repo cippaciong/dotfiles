@@ -227,6 +227,12 @@ require('lazy').setup({
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
         require'lspconfig'.ruby_lsp.setup{}
 
+        -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
+        require'lspconfig'.emmet_language_server.setup{}
+
+        -- TailwindCSS (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss)
+        require'lspconfig'.tailwindcss.setup{}
+
         -- Lua LSP configuration to work with neovim files
         -- (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
         require'lspconfig'.lua_ls.setup {
