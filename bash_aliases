@@ -27,9 +27,9 @@ alias wallpaper='bash ~/.fehbg'
 # alias emd='xrandr --output HDMI3  --mode 1920x1080 --left-of LVDS1 && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
 # alias emo='xrandr --output LVDS1 --mode 1366x768  --left-of HDMI3  && xrandr --output HDMI3  --off && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
 # Display Port
-alias emc='xrandr --output DP1 --mode 2560x1440 --same-as LVDS1 && xrandr --output LVDS1 --off && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
-alias emcdual='xrandr --output DP1 --mode 2560x1440 --above LVDS1 && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
-alias emo='xrandr --output LVDS1 --mode 1366x768  --left-of DP1 && xrandr --output DP1 --off && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
+alias emc='xrandr --output DP1 --mode 3840x2160 --scale 0.65x0.65 --same-as LVDS1 && xrandr --output LVDS1 --off && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
+alias emcdual='xrandr --output DP1 --mode 3840x2160 --scale 0.65x0.65 --above LVDS1 && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
+alias emo='xrandr --output LVDS1 --mode 1366x768 --same-as DP1 && xrandr --output DP1 --off && ~/.fehbg && eval $(grep setx ~/.xinitrc)'
 
 # Mosh
 alias debiandroplet='mosh -p 1194 debiandroplet'
