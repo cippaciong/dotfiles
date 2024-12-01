@@ -361,10 +361,7 @@ require('lazy').setup({
 
     -- Alternate between files, such as foo.go and foo_test.go
     {
-      -- Temporarily use jeanne-b fork until https://github.com/rgroli/other.nvim/pull/62 is merged
-      -- "rgroli/other.nvim",
-      "jeanne-b-/other.nvim",
-      branch = "Fix-escape_cwd_patterns",
+      "rgroli/other.nvim",
       config = function ()
         require("other-nvim").setup({
           -- If enabled, the window shows files that do not exist yet, based on pattern matching.
