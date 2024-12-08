@@ -387,7 +387,10 @@ require('lazy').setup({
     },
 
     -- Jinja2 syntax (for Pelican)
-    { "lepture/vim-jinja" }
+    { "lepture/vim-jinja" },
+
+    -- Ruby/Rails minitest
+    { "sunaku/vim-ruby-minitest" },
 
   -- Add plugins above this line
   },
