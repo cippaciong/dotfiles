@@ -218,14 +218,17 @@ require('lazy').setup({
     -- Community-defined LSP settings and custom overrides
     {
       "neovim/nvim-lspconfig",
+      lazy = false,
       config = function ()
         util = require "lspconfig/util"
 
-        local capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
-        require'lspconfig'.ruby_lsp.setup{}
+        require'lspconfig'.ruby_lsp.setup{
+          capabilities = capabilities
+        }
 
         -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
         require'lspconfig'.emmet_language_server.setup{}
@@ -521,7 +524,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader><leader>f', vim.lsp.buf.format, opts)
