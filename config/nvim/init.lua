@@ -215,6 +215,30 @@ require('lazy').setup({
       end,
     },
 
+    -- LSP package manager
+    {
+      "williamboman/mason.nvim",
+      lazy = false,
+      config = function ()
+        require("mason").setup()
+      end
+    },
+
+    {
+      "williamboman/mason-lspconfig.nvim",
+      lazy = false,
+      opts = {
+        ensure_installed = {
+          "emmet_language_server",
+          "lua_ls",
+          "rubocop",
+          "ruby_lsp",
+          "tailwindcss",
+        },
+        automatic_installation = true,
+      },
+    },
+
     -- Community-defined LSP settings and custom overrides
     {
       "neovim/nvim-lspconfig",
@@ -225,20 +249,20 @@ require('lazy').setup({
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+        local lspconfig = require('lspconfig')
+
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
-        require'lspconfig'.ruby_lsp.setup{
-          capabilities = capabilities
-        }
+        lspconfig.ruby_lsp.setup{ capabilities = capabilities }
 
         -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
-        require'lspconfig'.emmet_language_server.setup{}
+        lspconfig.emmet_language_server.setup{}
 
         -- TailwindCSS (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss)
-        require'lspconfig'.tailwindcss.setup{}
+        lspconfig.tailwindcss.setup{}
 
         -- Lua LSP configuration to work with neovim files
         -- (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
-        require'lspconfig'.lua_ls.setup {
+        lspconfig.lua_ls.setup {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
