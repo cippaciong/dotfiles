@@ -290,6 +290,20 @@ require('lazy').setup({
             Lua = {}
           }
         }
+
+        -- LSP mappings
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+        vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, {})
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+        vim.keymap.set('n', '<leader><leader>f', vim.lsp.buf.format, {})
+
+        vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", {})
+        vim.keymap.set('n', '<leader>s', "<cmd>belowright split | lua vim.lsp.buf.definition()<CR>", {})
+        vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {})
       end
     },
 
@@ -533,28 +547,3 @@ vim.keymap.set('n', '<leader>tf', ':TestFile -v<CR>', { noremap = true, silent =
 -- other.nvim
 vim.keymap.set('n', '<leader>fo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
 vim.keymap.set('n', '<leader>ft', '<cmd>Other test<CR>', { desc = 'Open associated test file for the currently active buffer' })
-
--- LSP mappings
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-    vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader><leader>f', vim.lsp.buf.format, opts)
-
-    vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
-    vim.keymap.set('n', '<leader>s', "<cmd>belowright split | lua vim.lsp.buf.definition()<CR>", opts)
-    vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, opts)
-  end,
-})
