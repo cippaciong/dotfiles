@@ -12,6 +12,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- This comes first, because we have mappings that depend on leader
+-- With a map leader it's possible to do extra key combinations
+-- i.e: <leader>w saves the current file
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
+
 ---------------
 --- PLUGINS ---
 ---------------
@@ -212,6 +218,21 @@ require('lazy').setup({
         -- To get ui-select loaded and working with telescope, you need to call
         -- load_extension, somewhere after setup function:
         require("telescope").load_extension("ui-select")
+
+        -- Telescope mappings
+        local builtin = require('telescope.builtin')
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
+        vim.keymap.set('n', '<leader>fF', builtin.git_files, { desc = 'Search git files' })
+        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
+        vim.keymap.set('n', '<leader>fG', builtin.grep_string, { desc = 'Search string under cursor in current directory' })
+        vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
+        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
+        vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search symbols in current document' })
+        vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Search symbols project-wide' })
+        vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
+        vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
+        vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Search nvim keymaps' })
       end,
     },
 
@@ -219,9 +240,7 @@ require('lazy').setup({
     {
       "williamboman/mason.nvim",
       lazy = false,
-      config = function ()
-        require("mason").setup()
-      end
+      config = true
     },
 
     {
@@ -235,7 +254,6 @@ require('lazy').setup({
           "ruby_lsp",
           "tailwindcss",
         },
-        automatic_installation = true,
       },
     },
 
@@ -243,16 +261,14 @@ require('lazy').setup({
     {
       "neovim/nvim-lspconfig",
       lazy = false,
-      config = function ()
-        util = require "lspconfig/util"
-
+      config = function()
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
         local lspconfig = require('lspconfig')
 
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
-        lspconfig.ruby_lsp.setup{ capabilities = capabilities }
+        lspconfig.ruby_lsp.setup({ capabilities = capabilities })
 
         -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
         lspconfig.emmet_language_server.setup{}
@@ -292,19 +308,16 @@ require('lazy').setup({
         }
 
         -- LSP mappings
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-        vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, {})
+        vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, {})
+        vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
+        vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, {})
+        vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, {})
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
-        vim.keymap.set('n', '<leader><leader>f', vim.lsp.buf.format, {})
-
-        vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", {})
-        vim.keymap.set('n', '<leader>s', "<cmd>belowright split | lua vim.lsp.buf.definition()<CR>", {})
-        vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {})
-      end
+        vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, {})
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+        vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, {})
+      end,
     },
 
     -- autocompletion
@@ -415,7 +428,11 @@ require('lazy').setup({
             "rails",
           },
         })
-      end,
+
+        -- other.nvim mappings
+        vim.keymap.set('n', '<leader>oo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
+        vim.keymap.set('n', '<leader>ot', '<cmd>Other test<CR>', { desc = 'Open associated test file for the currently active buffer' })
+        end,
     },
 
     -- testing framework
@@ -424,6 +441,10 @@ require('lazy').setup({
       config = function ()
         vim.g['test#strategy'] = 'neovim'
         vim.g['test#neovim#term_position'] = 'vert'
+
+        -- vim-test mappings
+        vim.keymap.set('n', '<leader>tt', ':TestNearest -v<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>tf', ':TestFile -v<CR>', { noremap = true, silent = true })
       end,
     },
 
@@ -479,12 +500,6 @@ vim.opt.tabstop = 2       -- number of spaces a TAB counts for
 vim.opt.autoindent = true -- copy indent from current line when starting a new line
 vim.opt.wrap = true
 
--- This comes first, because we have mappings that depend on leader
--- With a map leader it's possible to do extra key combinations
--- i.e: <leader>w saves the current file
-vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
-
 -- Fast saving
 -- vim.keymap.set('n', '<Leader>w', ':write!<CR>')
 -- vim.keymap.set('n', '<Leader>q', ':q!<CR>', { silent = true })
@@ -525,25 +540,3 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<CR>') -- Go to previous buffer
 -- Builtin comments
 vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
 vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })
-
--- Telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
-vim.keymap.set('n', '<leader>fF', builtin.git_files, { desc = 'Search git files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
-vim.keymap.set('n', '<leader>fG', builtin.grep_string, { desc = 'Search string under cursor in current directory' })
-vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
-vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = 'Search symbols in current document' })
-vim.keymap.set('n', '<leader>fS', builtin.lsp_dynamic_workspace_symbols, { desc = 'Search symbols project-wide' })
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Search diagnositcs' })
-vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Search nvim commands' })
-
--- vim-test
-vim.keymap.set('n', '<leader>tt', ':TestNearest -v<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>tf', ':TestFile -v<CR>', { noremap = true, silent = true })
-
--- other.nvim
-vim.keymap.set('n', '<leader>fo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
-vim.keymap.set('n', '<leader>ft', '<cmd>Other test<CR>', { desc = 'Open associated test file for the currently active buffer' })
