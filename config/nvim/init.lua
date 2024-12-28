@@ -454,6 +454,20 @@ require('lazy').setup({
     -- Ruby/Rails minitest
     { "sunaku/vim-ruby-minitest" },
 
+    -- Claude vim plugin for AI pair programming
+    {
+      "pasky/claude.vim",
+      config = function ()
+        vim.g['claude_api_key'] = vim.env.ANTHROPIC_API_KEY_EDITOR
+
+        -- claude.vim mappings
+        vim.g['claude_map_implement'] = "<Leader>ai"
+        vim.g['claude_map_open_chat'] = "<Leader>ac"
+        vim.g['claude_map_send_chat_message'] = "<C-]>"
+        vim.g['claude_map_cancel_response'] = "<Leader>ax"
+      end,
+    },
+
   -- Add plugins above this line
   },
 

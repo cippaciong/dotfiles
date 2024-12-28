@@ -44,9 +44,11 @@ export PATH="$PATH:$GOPATH/bin"
 # Initialize rbenv (added by `rbenv init`)
 eval "$(rbenv init - --no-rehash bash)"
 
+# Load secrets and API keys
+[[ -f ~/.env ]] && . ~/.env
 
+# Load .bashrc
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-
 
 # Autostart X at login
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
