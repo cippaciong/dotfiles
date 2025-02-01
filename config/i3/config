@@ -31,19 +31,16 @@ set $magenta    #b48ead
 set $cyan       #88c0d0
 set $white      #e5e9f0
 
-# blue
-set $focused   #81a1c1
-# yellow
+set $focused   #7a854c
 set $urgent    #ebcb8b
 
 
-#class				backgr.	  border    text
-client.focused                  $focused  $focused  $black
-client.focused_inactive 	#3C4C87   #3C4C87   #b9c8d1
-client.unfocused           	$black    $black    $white
-client.urgent                   $urgent   $urgent   $black
-client.background                         $black
-
+#class                    backgr.   border    text
+client.focused            $focused  $focused  $black
+client.focused_inactive   #3C4C87   #3C4C87   #b9c8d1
+client.unfocused          $black    $black    $white
+client.urgent             $urgent   $urgent   $black
+client.background         $black
 
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth yes
