@@ -454,6 +454,17 @@ require('lazy').setup({
     -- Ruby/Rails minitest
     { "sunaku/vim-ruby-minitest" },
 
+    -- Markdown live preview
+    {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
+    },
+
     -- Claude vim plugin for AI pair programming
     {
       "pasky/claude.vim",
