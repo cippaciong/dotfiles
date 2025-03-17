@@ -485,8 +485,6 @@ require('lazy').setup({
   -- Colorscheme that will be used when installing plugins. That happens before startup,
   -- so your regular color scheme would not have been loaded yet.
   install = { colorscheme = { 'habamax' } },
-  -- Automatically check for plugin updates
-  checker = { enabled = true },
 })
 
 ----------------
