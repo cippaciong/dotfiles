@@ -34,7 +34,8 @@ alias emo='xrandr --output LVDS1 --mode 1366x768 --same-as DP1 && xrandr --outpu
 # Mosh
 alias debiandroplet='mosh -p 1194 debiandroplet'
 alias cakeoven='mosh -p 1194 cakeoven'
-alias mediacenter='mosh -p 1194 mediacenter'
+alias willow='mosh -p 1194 willow'
+alias oak='mosh -p 1194 oak'
 alias vpstels='mosh -p 1194 vpstels'
 
 # Misc
