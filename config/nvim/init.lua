@@ -61,12 +61,18 @@ require('lazy').setup({
             section_separators = { left = '', right = ''},
           },
           sections = {
+            lualine_b = {},
             lualine_c = {
               {
                 'buffers',
                 show_filename_only = false,
               }
-            }
+            },
+            lualine_x = {},
+          },
+          inactive_sections = {
+            lualine_c = {},
+            lualine_x = {}
           }
         })
       end,
@@ -490,6 +496,9 @@ require('lazy').setup({
 -- disable netrw at the very start of our init.lua, because we use nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- disable showmode because we have lauline.nvim
+vim.opt.showmode = false
 
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors
 
