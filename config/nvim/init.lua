@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     'git',
     'clone',
     '--filter=blob:none',
-    '--branch=stable',  -- latest stable release
+    '--branch=stable', -- latest stable release
     lazyrepo,
     lazypath })
 end
@@ -27,7 +27,7 @@ require('lazy').setup({
     -- Colorscheme
     {
       "nordtheme/vim",
-      lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      lazy = false,    -- make sure we load this during startup if it is your main colorscheme
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
         -- load the colorscheme here
@@ -35,47 +35,89 @@ require('lazy').setup({
       end,
     },
 
+    -- noice.nvim to improve the UI especially of popup windows
+    {
+      "folke/noice.nvim",
+      lazy = false,
+      opts = {
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+          -- enable LSP UI handling (e.g. hover)
+          signature = { enabled = true },
+          hover = { enabled = true },
+          progress = { enabled = true },
+        },
+        presets = {
+          bottom_search = true,         -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
+        },
+      },
+      dependencies = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        -- "rcarriga/nvim-notify",
+      }
+    },
+
     -- File explorer
     {
       "nvim-tree/nvim-tree.lua",
       version = "*",
       lazy = false,
+
       dependencies = {
         "nvim-tree/nvim-web-devicons",
       },
-      config = function()
-        require("nvim-tree").setup {}
+
+      init = function()
         vim.keymap.set('n', '<F7>', '<cmd>NvimTreeToggle<CR>')
       end,
+
+      opts = {
+        view = {
+          width = {
+            max = -1
+          },
+        },
+      },
     },
 
     -- Statusline
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { 'nvim-tree/nvim-web-devicons' },
-      config = function ()
-        require("lualine").setup({
-          options = {
-            theme = 'nord',
-            component_separators = { left = '|', right = '|'},
-            section_separators = { left = '', right = ''},
+      opts = {
+        options = {
+          theme = 'nord',
+          component_separators = { left = '|', right = '|' },
+          section_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_b = {},
+          lualine_c = {
+            {
+              'buffers',
+              show_filename_only = true,
+            }
           },
-          sections = {
-            lualine_b = {},
-            lualine_c = {
-              {
-                'buffers',
-                show_filename_only = false,
-              }
-            },
-            lualine_x = {},
-          },
-          inactive_sections = {
-            lualine_c = {},
-            lualine_x = {}
-          }
-        })
-      end,
+          lualine_x = {},
+        },
+        inactive_sections = {
+          lualine_c = {},
+          lualine_x = {}
+        }
+      },
     },
 
     -- Highlight, edit, and navigate code
@@ -111,9 +153,9 @@ require('lazy').setup({
           incremental_selection = {
             enable = true,
             keymaps = {
-              init_selection = "<cr>", -- maps in normal mode to init the node/scope selection with space
-              node_incremental = "<cr>", -- increment to the upper named parent
-              node_decremental = "<bs>", -- decrement to the previous node
+              init_selection = "<cr>",     -- maps in normal mode to init the node/scope selection with space
+              node_incremental = "<cr>",   -- increment to the upper named parent
+              node_decremental = "<bs>",   -- decrement to the previous node
               scope_incremental = "<tab>", -- increment to the upper scope (as defined in locals.scm)
             },
           },
@@ -192,7 +234,7 @@ require('lazy').setup({
 
     -- Sets vim.ui.select to telescope.
     -- That means for example that neovim core stuff can fill the telescope picker
-    {'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Fuzzy finder framework.
     -- See keybindings in the configuration section at the end of the file
@@ -200,19 +242,19 @@ require('lazy').setup({
       "nvim-telescope/telescope.nvim",
       branch = '0.1.x',
       dependencies = {
-        "nvim-lua/plenary.nvim" ,
+        "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons",
       },
-      config = function ()
+      config = function()
         require("telescope").setup({
           extensions = {
             fzf = {
-              fuzzy = true,                    -- false will only do exact matching
-              override_generic_sorter = true,  -- override the generic sorter
-              override_file_sorter = true,     -- override the file sorter
-              case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                               -- the default case_mode is "smart_case"
+              fuzzy = true,                   -- false will only do exact matching
+              override_generic_sorter = true, -- override the generic sorter
+              override_file_sorter = true,    -- override the file sorter
+              case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+              -- the default case_mode is "smart_case"
             }
           }
         })
@@ -230,7 +272,8 @@ require('lazy').setup({
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search files' })
         vim.keymap.set('n', '<leader>fF', builtin.git_files, { desc = 'Search git files' })
         vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string in current directory (live grep)' })
-        vim.keymap.set('n', '<leader>fG', builtin.grep_string, { desc = 'Search string under cursor in current directory' })
+        vim.keymap.set('n', '<leader>fG', builtin.grep_string,
+          { desc = 'Search string under cursor in current directory' })
         vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = 'Search lines in current buffer' })
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Search buffers' })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Search help tags' })
@@ -259,6 +302,7 @@ require('lazy').setup({
           "rubocop",
           "ruby_lsp",
           "tailwindcss",
+          "ts_ls",
         },
       },
     },
@@ -267,28 +311,30 @@ require('lazy').setup({
     {
       "neovim/nvim-lspconfig",
       lazy = false,
-      config = function()
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      init = function()
+        -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-        local lspconfig = require('lspconfig')
-
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
-        lspconfig.ruby_lsp.setup({ capabilities = capabilities })
+        vim.lsp.enable('ruby_lsp')
 
         -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
-        lspconfig.emmet_language_server.setup{}
+        vim.lsp.enable('emmet_language_server')
 
         -- TailwindCSS (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss)
-        lspconfig.tailwindcss.setup{}
+        vim.lsp.enable('tailwindcss')
+
+        -- Typescript (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls)
+        vim.lsp.enable('ts_ls')
 
         -- Lua LSP configuration to work with neovim files
         -- (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
-        lspconfig.lua_ls.setup {
+        vim.lsp.enable('lua_ls')
+        vim.lsp.config('lua_ls', {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
-              if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+              if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
                 return
               end
             end
@@ -311,7 +357,7 @@ require('lazy').setup({
           settings = {
             Lua = {}
           }
-        }
+        })
 
         -- LSP mappings
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
@@ -353,10 +399,10 @@ require('lazy').setup({
 
         require('cmp').setup({
           snippet = {
-              expand = function(args)
-                -- REQUIRED - you must specify a snippet engin
-                luasnip.lsp_expand(args.body)
-              end,
+            expand = function(args)
+              -- REQUIRED - you must specify a snippet engin
+              luasnip.lsp_expand(args.body)
+            end,
           },
           formatting = {
             format = lspkind.cmp_format {
@@ -412,8 +458,8 @@ require('lazy').setup({
           },
           sources = {
             { name = 'nvim_lsp' },
-            { name = "luasnip", keyword_length = 2},
-            { name = "buffer", keyword_length = 5},
+            { name = "luasnip", keyword_length = 2 },
+            { name = "buffer",  keyword_length = 5 },
           },
         })
       end,
@@ -422,7 +468,7 @@ require('lazy').setup({
     -- Alternate between files, such as foo.go and foo_test.go
     {
       "rgroli/other.nvim",
-      config = function ()
+      config = function()
         require("other-nvim").setup({
           -- If enabled, the window shows files that do not exist yet, based on pattern matching.
           -- Selecting a file will create it.
@@ -436,15 +482,17 @@ require('lazy').setup({
         })
 
         -- other.nvim mappings
-        vim.keymap.set('n', '<leader>oo', '<cmd>Other<CR>', { desc = 'Open associated files for the currently active buffer' })
-        vim.keymap.set('n', '<leader>ot', '<cmd>Other test<CR>', { desc = 'Open associated test file for the currently active buffer' })
-        end,
+        vim.keymap.set('n', '<leader>oo', '<cmd>Other<CR>',
+          { desc = 'Open associated files for the currently active buffer' })
+        vim.keymap.set('n', '<leader>ot', '<cmd>Other test<CR>',
+          { desc = 'Open associated test file for the currently active buffer' })
+      end,
     },
 
     -- testing framework
     {
       "vim-test/vim-test",
-      config = function ()
+      config = function()
         vim.g['test#strategy'] = 'neovim'
         vim.g['test#neovim#term_position'] = 'vert'
 
@@ -474,7 +522,7 @@ require('lazy').setup({
     -- Claude vim plugin for AI pair programming
     {
       "pasky/claude.vim",
-      config = function ()
+      config = function()
         vim.g['claude_api_key'] = vim.env.ANTHROPIC_API_KEY_EDITOR
 
         -- claude.vim mappings
@@ -485,7 +533,7 @@ require('lazy').setup({
       end,
     },
 
-  -- Add plugins above this line
+    -- Add plugins above this line
   },
 })
 
@@ -500,21 +548,21 @@ vim.g.loaded_netrwPlugin = 1
 -- disable showmode because we have lauline.nvim
 vim.opt.showmode = false
 
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors
+vim.opt.termguicolors = true  -- Enable 24-bit RGB colors
 
-vim.opt.number = true              -- Show line numbers
-vim.opt.relativenumber = true      -- Show line relative numbers
-vim.opt.showmatch = true           -- Highlight matching parenthesis
-vim.opt.splitright = true          -- Split windows right to the current windows
-vim.opt.splitbelow = true          -- Split windows below to the current windows
-vim.opt.autowrite = true           -- Automatically save before :next, :make etc.
+vim.opt.number = true         -- Show line numbers
+vim.opt.relativenumber = true -- Show line relative numbers
+vim.opt.showmatch = true      -- Highlight matching parenthesis
+vim.opt.splitright = true     -- Split windows right to the current windows
+vim.opt.splitbelow = true     -- Split windows below to the current windows
+vim.opt.autowrite = true      -- Automatically save before :next, :make etc.
 -- vim.opt.autochdir = true           -- Change CWD when I open a file
 
-vim.opt.mouse = 'a'                -- Enable mouse support
-vim.opt.swapfile = false           -- Don't use swapfile
-vim.opt.ignorecase = true          -- Search case insensitive...
-vim.opt.smartcase = true           -- ... but not it begins with upper case
-vim.opt.completeopt = 'menuone,noinsert,noselect'  -- Autocomplete options
+vim.opt.mouse = 'a'                               -- Enable mouse support
+vim.opt.swapfile = false                          -- Don't use swapfile
+vim.opt.ignorecase = true                         -- Search case insensitive...
+vim.opt.smartcase = true                          -- ... but not it begins with upper case
+vim.opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath('data') .. 'undo'
@@ -550,8 +598,8 @@ vim.keymap.set('n', '<Leader>n', ':nohlsearch<CR>')
 
 -- Search mappings: These will make it so that going to the next one in a
 -- search will center on the line it's found in.
-vim.keymap.set('n', 'n', 'nzzzv', {noremap = true})
-vim.keymap.set('n', 'N', 'Nzzzv', {noremap = true})
+vim.keymap.set('n', 'n', 'nzzzv', { noremap = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true })
 
 -- Split navigation mappings: instead of ctrl-w then j, it’s just ctrl-j
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -561,9 +609,9 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 -- Buffer and windows management mappings
 vim.keymap.set('n', '<leader>d', '<cmd>bp|bd #<CR>') -- Close buffer without closing split
-vim.keymap.set('n', '<leader>c', '<cmd>close<CR>') -- Close the current window
-vim.keymap.set('n', ']b', '<cmd>bnext<CR>') -- Go to next buffer
-vim.keymap.set('n', '[b', '<cmd>bprevious<CR>') -- Go to previous buffer
+vim.keymap.set('n', '<leader>c', '<cmd>close<CR>')   -- Close the current window
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>')          -- Go to next buffer
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>')      -- Go to previous buffer
 
 -- Builtin comments
 vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
