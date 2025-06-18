@@ -260,7 +260,7 @@ bindsym $mod+t        exec          notify-send -u low "$(playerctl metadata tit
 # Internet keybindings
 bindsym $mod+Mod1+w exec firefox
 bindsym $mod+Mod1+m exec thunderbird
-bindsym $mod+Mod1+t exec telegram-desktop
+bindsym $mod+Mod1+t exec Telegram
 
 # Misc keybindings
 bindsym $mod+Mod1+v exec urxvt
