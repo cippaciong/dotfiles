@@ -58,6 +58,12 @@ family = "IosevkaTerm Nerd Font"
 x = 0
 y = 0
 
+# Map Ctrl+/ to send Ctrl+_ (ASCII 0x1f), which is the standard terminal code
+[[keyboard.bindings]]
+key = "Slash"
+mods = "Control"
+chars = "\u001f"
+
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
