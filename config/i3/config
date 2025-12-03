@@ -125,7 +125,7 @@ bindsym $mod+Mod1+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # customize workspace names
 set $ws1 1:www
@@ -138,16 +138,6 @@ set $ws7 7:play
 set $ws8 8:ssh
 set $ws9 9:var
 set $ws10 10:lck
-# set $ws1 1:
-# set $ws2 2:
-# set $ws3 3:
-# set $ws4 4:
-# set $ws5 5:
-# set $ws6 6:
-# set $ws7 7:
-# set $ws8 8:
-# set $ws9 9:
-# set $ws10 10:
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -215,33 +205,9 @@ bindsym $mod+r mode "resize"
 # Use Polybar instead of i3bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-        #status_command i3status
-        #position bottom
-        #strip_workspace_numbers yes
-        #font pango:Iosevka 10
-        #mode dock
-        #tray_output primary
-
-    #colors {
-            #background $black
-            #statusline $white
-
-            ## class            border    back     text 
-            #focused_workspace  $black    $black   $focused
-            #active_workspace   $black    $black   #696f89
-            #inactive_workspace $black    $black   $white
-            #urgent_workspace   $black    $black   $urgent
-    #}
-#}
-
 # System keybindings
-# bindsym Mod4+u exec termite --class=upgrade --hold -e "aggiorna"; workspace $ws2
 bindsym $mod+Mod1+c     exec    i3-sensible-terminal --class=config --title=config -e "bash -c 'nvim ~/.config/i3/config'"
 bindsym $mod+Mod1+u     exec    i3-sensible-terminal --class=upgrade --title=upgrade --hold -e "aggiorna"
-#bindsym Control+Mod1+l  exec    i3lock -e -c 000000
 bindsym Control+Mod1+l  exec    lock.sh
 bindsym XF86MonBrightnessUp     exec "xbacklight +5"
 bindsym XF86MonBrightnessDown   exec "xbacklight -5"
@@ -276,32 +242,18 @@ bindsym $mod+Mod1+q exec copyq toggle
 #Assign application to workspace
 assign [class="firefox"] → $ws1
 assign [class="Chromium"] → $ws1
-assign [class="qutebrowser"] → $ws1
 
 assign [title="config"] → $ws2
-assign [class="DrRacket"] → $ws2
 
 assign [title="ranger"] → $ws3
 assign [class="Thunar"] → $ws3
 assign [class="Pcmanfm"] → $ws3
 
 assign [class="TelegramDesktop"] → $ws4
-assign [class="Hexchat"] → $ws4
-assign [class="Slack"] → $ws4
-assign [class="Whatsie"] → $ws4
-assign [class="Gajim"] → $ws4
-assign [class="Dino"] → $ws4
-assign [class="Rambox"] → $ws4
-assign [class="Microsoft Teams - Preview"] → $ws4
 
 assign [class="thunderbird"] → $ws5
 
 assign [class="mpv"] → $ws6
-assign [class="Evince"] → $ws6
-assign [class="Foxit Reader"] → $ws6
-assign [class="MuPDF"] → $ws6
-assign [class="Lxappearance"] → $ws6
-assign [class="Quake3-UrT.x86_64"] → $ws6
 
 assign [title="music"] → $ws7
 assign [class="Spotify"] → $ws7
@@ -317,11 +269,7 @@ for_window [title="Avanzamento delle operazione sui file"] floating enable
 for_window [class="Lxpolkit"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Gpick"] floating enable
-for_window [class="qutepet"] floating enable
 for_window [class="copyq"] floating enable
-# https://www.reddit.com/r/i3wm/comments/8gh4c0/working_fix_for_focusing_intellij_popups/
-# Don't forget to add suppress.focus.stealing=false to ~/.IdeaIC20xx.y/config/idea.properties (https://youtrack.jetbrains.com/issue/IDEA-194124)
-for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 # Autostart
 exec --no-startup-id nm-applet
