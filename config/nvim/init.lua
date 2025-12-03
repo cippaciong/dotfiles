@@ -271,24 +271,23 @@ require('lazy').setup({
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-        local lspconfig = require('lspconfig')
-
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
-        lspconfig.ruby_lsp.setup({ capabilities = capabilities })
+        vim.lsp.config('ruby_lsp', { capabilities = capabilities })
+        vim.lsp.enable('ruby_lsp')
 
         -- Emmet (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmet_language_server)
-        lspconfig.emmet_language_server.setup{}
+        vim.lsp.enable('emmet_language_server')
 
         -- TailwindCSS (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss)
-        lspconfig.tailwindcss.setup{}
+        vim.lsp.enable('tailwindcss')
 
         -- Lua LSP configuration to work with neovim files
         -- (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
-        lspconfig.lua_ls.setup {
+        vim.lsp.config('lua_ls', {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
-              if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+              if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
                 return
               end
             end
@@ -311,7 +310,7 @@ require('lazy').setup({
           settings = {
             Lua = {}
           }
-        }
+        })
 
         -- LSP mappings
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
