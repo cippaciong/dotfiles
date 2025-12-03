@@ -193,9 +193,19 @@ require('lazy').setup({
       opts = {},
       ---@diagnostics enable: missing-fields
       config = function()
+        require('fzf-lua').setup({
+          actions = {
+            files = {
+              ["enter"] = FzfLua.actions.file_edit,
+            }
+          }
+        })
+
+        vim.api.nvim_set_keymap("n", "<leader>g", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>b", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>B", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>f", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<leader>F", [[<Cmd>lua require"fzf-lua".git_files()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>a", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>A", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
@@ -510,3 +520,48 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<CR>')      -- Go to previous buffer
 -- Builtin comments
 vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
 vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })
+
+-- Show diagnostics under cursor in a floating window (use <C-w>w or <C-w><C-w> to switch focus to it)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+
+-- Show diagnostics automatically in a floating window on cursor hold
+vim.opt.updatetime = 2000 --  set updatetime to 2000 milliseconds (2 seconds) for faster diagnostics
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end
+})
+
+-- Custom diagnostic signs
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●',
+    spacing = 4,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅚 ",
+      [vim.diagnostic.severity.WARN] = "󰀪 ",
+      [vim.diagnostic.severity.HINT] = "󰌶 ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = true,
+    header = '',
+    prefix = '',
+  },
+})
+
+-- Your custom highlight groups for colors
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = '#808080', italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { fg = '#808080', italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { fg = '#808080', italic = true })
+vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { fg = '#808080', italic = true })
+
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#2a2a2a' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#2a2a2a', fg = '#565656' })
