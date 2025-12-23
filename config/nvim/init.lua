@@ -79,110 +79,31 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     {
       'nvim-treesitter/nvim-treesitter',
-      dependencies = {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-      },
+      lazy = false,
       build = ":TSUpdate", -- automatically update installed parses on plugin upgrades
       config = function()
-        require('nvim-treesitter.configs').setup({
-          ensure_installed = {
-            'bash',
-            'css',
-            'go',
-            'gomod',
-            'html',
-            'javascript',
-            'json',
-            'lua',
-            'markdown',
-            'markdown_inline',
-            'python',
-            'ruby',
-            'typescript',
-            'vimdoc',
-            'vim',
-            'yaml',
-          },
-          indent = { enable = true },
-          -- Allows to select code incrementally, starting from a node and then expanding to broader scopes
-          -- See: https://liam.rs/posts/Incremental-select-with-treesitter/
-          incremental_selection = {
-            enable = true,
-            keymaps = {
-              init_selection = "<cr>",     -- maps in normal mode to init the node/scope selection with space
-              node_incremental = "<cr>",   -- increment to the upper named parent
-              node_decremental = "<bs>",   -- decrement to the previous node
-              scope_incremental = "<tab>", -- increment to the upper scope (as defined in locals.scm)
-            },
-          },
-          highlight = {
-            enable = true,
-
-            -- Disable slow treesitter highlight for large files
-            disable = function(lang, buf)
-              local max_filesize = 100 * 1024 -- 100 KB
-              local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-              if ok and stats and stats.size > max_filesize then
-                return true
-              end
-            end,
-
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
-            additional_vim_regex_highlighting = false,
-          },
-
-          textobjects = {
-            -- Improve selection allowing to select by text object. (e.g. 'vic' -> select inside class)
-            select = {
-              enable = true,
-              lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-              keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ['aa'] = '@parameter.outer',
-                ['ia'] = '@parameter.inner',
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-                ["iB"] = "@block.inner",
-                ["aB"] = "@block.outer",
-              },
-            },
-            -- Improve jumps to allow easy code traversal from one class/function to the other
-            move = {
-              enable = true,
-              set_jumps = true, -- whether to set jumps in the jumplist
-              goto_next_start = {
-                [']]'] = '@function.outer',
-              },
-              goto_next_end = {
-                [']['] = '@function.outer',
-              },
-              goto_previous_start = {
-                ['[['] = '@function.outer',
-              },
-              goto_previous_end = {
-                ['[]'] = '@function.outer',
-              },
-            },
-            -- Swap function parameters
-            swap = {
-              enable = true,
-              swap_next = {
-                ['<leader>sn'] = '@parameter.inner',
-              },
-              swap_previous = {
-                ['<leader>sp'] = '@parameter.inner',
-              },
-            },
-          },
-        })
+        require 'nvim-treesitter'.install {
+          'bash',
+          'css',
+          'go',
+          'gomod',
+          'html',
+          'javascript',
+          'json',
+          'lua',
+          'markdown',
+          'markdown_inline',
+          'python',
+          'ruby',
+          'typescript',
+          'vimdoc',
+          'vim',
+          'yaml',
+        }
       end,
     },
 
+    -- Fuzzy finder
     {
       "ibhagwan/fzf-lua",
       -- optional for icon support
