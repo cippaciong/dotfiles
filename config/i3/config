@@ -247,11 +247,11 @@ assign [title="config"] → $ws2
 
 assign [title="ranger"] → $ws3
 assign [class="Thunar"] → $ws3
-assign [class="Pcmanfm"] → $ws3
 
 assign [class="TelegramDesktop"] → $ws4
+assign [class="Signal"] → $ws4
 
-assign [class="thunderbird"] → $ws5
+assign [class="org.mozilla.Thunderbird"] → $ws5
 
 assign [class="mpv"] → $ws6
 
