@@ -146,6 +146,7 @@ require('lazy').setup({
       lazy = false,
       opts = {
         ensure_installed = {
+          "biome",
           "emmet_language_server",
           "lua_ls",
           "rubocop",
@@ -162,6 +163,8 @@ require('lazy').setup({
       config = function()
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+        -- Biome (html, css, js/ts, json etc.)
+        vim.lsp.enable('biome')
 
         -- Ruby (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp)
         vim.lsp.config('ruby_lsp', { capabilities = capabilities })
