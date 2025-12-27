@@ -122,15 +122,16 @@ require('lazy').setup({
           }
         })
 
-        vim.api.nvim_set_keymap("n", "<leader>fg", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fF", [[<Cmd>lua require"fzf-lua".git_files()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>fa", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>fA", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>fb", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>fB", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<leader>fc", [[<Cmd>lua require"fzf-lua".commands()<CR>]], {})
         vim.api.nvim_set_keymap("n", "<leader>fe", [[<Cmd>lua require"fzf-lua".diagnostics_document()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<leader>fF", [[<Cmd>lua require"fzf-lua".git_files()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<leader>fg", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
       end
     },
 
@@ -214,7 +215,7 @@ require('lazy').setup({
         vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, {})
         vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, {})
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
-        vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, {})
+        vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, {})
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
         vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, {})
       end,
