@@ -76,33 +76,6 @@ require('lazy').setup({
       }
     },
 
-    -- Highlight, edit, and navigate code
-    {
-      'nvim-treesitter/nvim-treesitter',
-      lazy = false,
-      build = ":TSUpdate", -- automatically update installed parses on plugin upgrades
-      config = function()
-        require 'nvim-treesitter'.install {
-          'bash',
-          'css',
-          'go',
-          'gomod',
-          'html',
-          'javascript',
-          'json',
-          'lua',
-          'markdown',
-          'markdown_inline',
-          'python',
-          'ruby',
-          'typescript',
-          'vimdoc',
-          'vim',
-          'yaml',
-        }
-      end,
-    },
-
     -- Fuzzy finder
     {
       "ibhagwan/fzf-lua",
