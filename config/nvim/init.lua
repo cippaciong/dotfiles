@@ -287,6 +287,14 @@ require('lazy').setup({
       end,
     },
 
+    -- Amp Plugin
+    {
+      "sourcegraph/amp.nvim",
+      branch = "main",
+      lazy = false,
+      opts = { auto_start = true, log_level = "info" },
+    },
+
     -- Alternate between files, such as foo.go and foo_test.go
     {
       "rgroli/other.nvim",
