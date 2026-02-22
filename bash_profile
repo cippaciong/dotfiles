@@ -48,6 +48,9 @@ export PATH="$PATH:$GOPATH/bin"
 # Nodejs
 export npm_config_prefix="$HOME/.local"
 
+# Android
+export ANDROID_HOME="$HOME/.Android"
+
 # Initialize rbenv (added by `rbenv init`)
 eval "$(rbenv init - --no-rehash bash)"
 
