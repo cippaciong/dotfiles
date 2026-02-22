@@ -65,6 +65,11 @@ require('lazy').setup({
             {
               'buffers',
               show_filename_only = false,
+              buffers_color = {
+                -- Swap active and inactive colors to make them more intutive (`c` is the lualine section)
+                active = 'lualine_c_inactive',
+                inactive = 'lualine_c_normal',
+              },
             }
           },
           lualine_x = {},
