@@ -36,6 +36,7 @@ alias debiandroplet='mosh -p 1194 debiandroplet'
 alias cakeoven='mosh -p 1194 cakeoven'
 alias willow='mosh -p 1194 willow'
 alias oak='mosh -p 1194 oak'
+alias ivy='mosh -p 1194 ivy'
 alias vpstels='mosh -p 1194 vpstels'
 
 # Misc
