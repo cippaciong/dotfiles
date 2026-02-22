@@ -95,16 +95,32 @@ require('lazy').setup({
           }
         })
 
-        vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fa", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fA", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fb", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fB", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fc", [[<Cmd>lua require"fzf-lua".commands()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fe", [[<Cmd>lua require"fzf-lua".diagnostics_document()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fF", [[<Cmd>lua require"fzf-lua".git_files()<CR>]], {})
-        vim.api.nvim_set_keymap("n", "<leader>fg", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".helptags()<CR>]],
+          { desc = 'Search neovim help tags' })
+        vim.api.nvim_set_keymap("n", "<leader>fa", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]],
+          { desc = 'Search all project lines' })
+        vim.api.nvim_set_keymap("n", "<leader>fA", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]],
+          { desc = 'Live grep current project (faster but less accurate)' })
+        vim.api.nvim_set_keymap("n", "<leader>fb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]],
+          { desc = 'Find open buffers' })
+        vim.api.nvim_set_keymap("n", "<leader>fB", [[<Cmd>lua require"fzf-lua".builtin()<CR>]],
+          { desc = 'Find fzf-lua builtin commands' })
+        vim.api.nvim_set_keymap("n", "<leader>fc", [[<Cmd>lua require"fzf-lua".commands()<CR>]],
+          { desc = 'Find neovim commands' })
+        vim.api.nvim_set_keymap("n", "<leader>fe", [[<Cmd>lua require"fzf-lua".diagnostics_document()<CR>]],
+          { desc = 'Find document LSP diagnostics' })
+        vim.api.nvim_set_keymap("n", "<leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]],
+          { desc = 'Find files in the current directory' })
+        vim.api.nvim_set_keymap("n", "<leader>fF", [[<Cmd>lua require"fzf-lua".git_files()<CR>]],
+          { desc = 'Find files in the current git project' })
+        vim.api.nvim_set_keymap("n", "<leader>fg", [[<Cmd>lua require"fzf-lua".global()<CR>]],
+          { desc = 'Global picker for files,buffers and symbols' })
+        vim.api.nvim_set_keymap("n", "<leader>fk", [[<Cmd>lua require"fzf-lua".keymaps()<CR>]],
+          { desc = 'Find keymaps' })
+        vim.api.nvim_set_keymap("n", "<leader>fl", [[<Cmd>lua require"fzf-lua".lines()<CR>]],
+          { desc = 'Find lines in all the open buffers' })
+        vim.api.nvim_set_keymap("n", "<leader>fL", [[<Cmd>lua require"fzf-lua".blines()<CR>]],
+          { desc = 'Find lines in the current buffer' })
       end
     },
 
