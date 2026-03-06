@@ -147,6 +147,7 @@ require('lazy').setup({
           "rubocop",
           "ruby_lsp",
           "tailwindcss",
+          "terraformls",
         },
       },
     },
@@ -158,6 +159,19 @@ require('lazy').setup({
       config = function()
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+        -- Automatically format on save if LSP is available
+        vim.api.nvim_create_autocmd('LspAttach', {
+          callback = function(args)
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              buffer = args.buf,
+              callback = function()
+                vim.lsp.buf.format({ buf = args.buf })
+              end,
+            })
+          end,
+        })
+
         -- Biome (html, css, js/ts, json etc.)
         vim.lsp.enable('biome')
 
@@ -170,6 +184,14 @@ require('lazy').setup({
 
         -- TailwindCSS (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss)
         vim.lsp.enable('tailwindcss')
+
+        -- Terraform (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraformls)
+        -- Enable it also for hcl files (e.g. terragrunt.hcl)
+        vim.lsp.config('terraformls', {
+          filetypes = { 'terraform', 'terraform-vars', 'hcl' },
+        })
+        vim.lsp.enable('terraformls')
+
 
         -- Lua LSP configuration to work with neovim files
         -- (https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls)
