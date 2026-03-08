@@ -11,6 +11,7 @@ alias suspend='lock.sh && systemctl suspend'
 alias sudo='sudo -E '
 alias grep='grep --color'
 alias tsp='trackspeed.sh'
+alias switch-theme='bash ~/.config/theme-switch/toggle.sh && cat ~/.config/theme-switch/current'
 
 # Docker
 alias dockerip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" '

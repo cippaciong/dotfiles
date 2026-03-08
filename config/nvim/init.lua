@@ -24,15 +24,15 @@ vim.g.maplocalleader = '\\'
 -- Setup lazy.nvim
 require('lazy').setup({
   spec = {
-    -- Colorscheme
+    -- Colorschemes
     {
       "nordtheme/vim",
-      lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-      priority = 1000, -- make sure to load this before all the other start plugins
-      config = function()
-        -- load the colorscheme here
-        vim.cmd([[colorscheme nord]])
-      end,
+      lazy = true,
+    },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      lazy = true,
     },
 
     -- File explorer
@@ -55,7 +55,7 @@ require('lazy').setup({
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       opts = {
         options = {
-          theme = 'nord',
+          theme = 'auto',
           component_separators = { left = '|', right = '|' },
           section_separators = { left = '', right = '' },
         },
@@ -513,5 +513,26 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextWarn', { fg = '#808080', italic = t
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextInfo', { fg = '#808080', italic = true })
 vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { fg = '#808080', italic = true })
 
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#2a2a2a' })
-vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#2a2a2a', fg = '#565656' })
+-- Theme switching
+function ApplyTheme()
+  local f = io.open(vim.fn.expand('~/.config/theme-switch/current'), 'r')
+  local theme = 'dark'
+  if f then
+    theme = f:read('*l'):gsub('%s+', '')
+    f:close()
+  end
+
+  if theme == 'light' then
+    vim.o.background = 'light'
+    vim.cmd.colorscheme('catppuccin-latte')
+  else
+    vim.o.background = 'dark'
+    vim.cmd.colorscheme('nord')
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#2a2a2a' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = '#2a2a2a', fg = '#565656' })
+  end
+
+  require('lualine').setup({ options = { theme = 'auto' } })
+end
+
+ApplyTheme()
