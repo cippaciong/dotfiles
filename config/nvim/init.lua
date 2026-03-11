@@ -92,13 +92,7 @@ require('lazy').setup({
       opts = {},
       ---@diagnostics enable: missing-fields
       config = function()
-        require('fzf-lua').setup({
-          actions = {
-            files = {
-              ["enter"] = FzfLua.actions.file_edit,
-            }
-          }
-        })
+        require('fzf-lua').setup({})
 
         vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".helptags()<CR>]],
           { desc = 'Search neovim help tags' })
@@ -468,8 +462,10 @@ vim.keymap.set('n', ']b', '<cmd>bnext<CR>')          -- Go to next buffer
 vim.keymap.set('n', '[b', '<cmd>bprevious<CR>')      -- Go to previous buffer
 
 -- Builtin comments
-vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
-vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })
+vim.keymap.set('n', '<C-_>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' }) -- Required by tmux
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Comment with Ctrl+/ in NORMAL mode' })
+vim.keymap.set('v', '<C-_>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })  -- Required by tmux
+vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Comment with Ctrl+/ in VISUAL mode' })
 
 -- Show diagnostics under cursor in a floating window (use <C-w>w or <C-w><C-w> to switch focus to it)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
