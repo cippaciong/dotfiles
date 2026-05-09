@@ -255,3 +255,5 @@ for_window [class="copyq"] floating enable
 # Autostart
 exec --no-startup-id nm-applet
 exec --no-startup-id copyq
+# Dark/Light theme switcher
+exec --no-startup-id systemctl --user start xsettingsd.service
