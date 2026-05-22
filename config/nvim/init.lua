@@ -375,15 +375,15 @@ require('lazy').setup({
     -- Ruby/Rails minitest
     { "sunaku/vim-ruby-minitest" },
 
-    -- Markdown live preview
+    -- Markdown live preview (install without yarn or npm)
     {
       "iamcco/markdown-preview.nvim",
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && yarn install",
-      init = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
       ft = { "markdown" },
+      build = function()
+        require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+        vim.fn["mkdp#util#install"]()
+      end,
     },
 
     -- Goyo - Distraction-free writing in Vim
