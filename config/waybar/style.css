@@ -28,7 +28,8 @@ button:hover {
 }
 
 #workspaces button {
-  padding: 0 0.4em;
+  margin: 0.2em 0.1em;
+  padding: 0 0.25em;
   background: none;
   color: #D8DEE9;
   font-weight: bold;
