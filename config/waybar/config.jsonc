@@ -15,6 +15,7 @@
     "modules-right": [
         "idle_inhibitor",
         "pulseaudio",
+        "bluetooth",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -132,6 +133,27 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        "format": "{icon} {status}",
+        "format-disabled": "",
+        "format-off": "{icon} off",
+        "format-on": "{icon}",
+        "format-connected": "{icon} {device_alias}",
+        "format-connected-battery": "{icon} {device_alias} {device_battery_percentage}%",
+        "format-icons": {
+            "enabled": "",
+            "disabled": "",
+            "off": "",
+            "connected": ""
+        },
+        "max-length": 22,
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "blueman-manager",
+        "on-click-right": "$HOME/.config/waybar/bluetooth-toggle-headphones"
     },
     "custom/media": {
         "format": "{icon} {text}",

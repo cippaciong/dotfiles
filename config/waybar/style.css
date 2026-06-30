@@ -66,6 +66,7 @@ button:hover {
 #temperature,
 #backlight,
 #network,
+#bluetooth,
 #pulseaudio,
 #wireplumber,
 #custom-media,
@@ -132,6 +133,16 @@ label:focus {
 
 #pulseaudio.muted {
   background-color: #BF616A;
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+  background-color: #BF616A;
+}
+
+#bluetooth.connected {
+  background-color: #A3BE8C;
+  color: #2E3440;
 }
 
 #wireplumber.muted {
