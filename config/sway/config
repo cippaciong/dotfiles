@@ -1,0 +1,262 @@
+# Sway config migrated from ~/.config/i3/config.
+# The i3 config remains independent and unchanged.
+
+### Variables
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Terminal and launcher.
+set $term kitty
+set $menu rofi
+
+# Named workspaces migrated from i3.
+set $ws1 1:www
+set $ws2 2:dev
+set $ws3 3:file
+set $ws4 4:chat
+set $ws5 5:mail
+set $ws6 6:gui
+set $ws7 7:play
+set $ws8 8:ssh
+set $ws9 9:var
+set $ws10 10:lck
+
+### Appearance and layout
+
+font pango:Iosevka Nerd Font Propo Bold 10
+
+workspace_auto_back_and_forth yes
+
+default_border pixel 2
+gaps inner 10
+smart_gaps off
+smart_borders off
+
+# Nord dark colors, migrated from the current i3 theme.
+set $black #2e3440
+set $focused #4c566a
+set $urgent #ebcb8b
+
+# class                 border   backgr.  text
+client.focused          $focused $focused #e5e9f0
+client.focused_inactive #3C4C87  #3C4C87  #b9c8d1
+client.unfocused        $black   $black   #e5e9f0
+client.urgent           $urgent  $urgent  $black
+client.background       $black
+
+### Outputs
+
+# Use 1.2 scaling for the built-in/default output and 1.5 for the external
+# HDMI display. The later, specific rule overrides the wildcard.
+output * scale 1.2 bg "~/Nextcloud/Immagini/Sfondi/Rain on Pine.jpg" fill
+output HDMI-A-1 scale 1.5
+
+### Key bindings
+
+# Keep Sway's default terminal command while preserving the i3 binding layout.
+bindsym $mod+Return exec $term
+bindsym $mod+space exec $menu -modi 'drun,run,window,ssh' -show drun
+
+bindsym $mod+Shift+q kill
+
+# Scratchpad.
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Focus containers.
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move containers.
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Layout.
+bindsym $mod+o splith
+bindsym $mod+v splitv
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Mod1+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+d focus child
+
+# Drag floating windows with Mod+left click and resize with Mod+right click.
+floating_modifier $mod normal
+
+# Switch workspaces.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move the focused container to a workspace.
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Move the current workspace to the next output on the right. With the usual
+# two-monitor horizontal layout this preserves the old Mod+m workflow.
+bindsym $mod+m move workspace to output right
+
+# Session controls.
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Resize mode.
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+### Application bindings
+
+# Commands that work the same under Wayland are retained. X11-only display
+# commands are intentionally left out for now.
+bindsym $mod+Mod1+c exec $term --app-id=config --title=config nvim ~/.config/sway/config
+bindsym $mod+Mod1+w exec firefox
+bindsym $mod+Mod1+m exec thunderbird
+bindsym $mod+Mod1+t exec Telegram
+bindsym $mod+Mod1+g exec galculator
+bindsym $mod+Mod1+f exec thunar
+bindsym $mod+Mod1+p exec $term --app-id=music --title=music cmus
+bindsym $mod+Mod1+b exec pkill -SIGUSR1 waybar
+bindsym Control+Mod1+p exec copyq show
+bindsym Control+Mod1+l exec swaylock --daemonize --color 2e3440
+
+bindsym $mod+t exec notify-send -u low "$(playerctl metadata title) ($(playerctl metadata album))" "$(playerctl metadata artist)"
+
+# Keep Sway's default media, volume, brightness, and screenshot commands.
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioStop exec playerctl stop
+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym Print exec grim
+bindsym $mod+Mod1+s exec grim -g "$(slurp)"
+
+### Workspace assignments
+
+# Native Wayland windows use app_id; XWayland windows use class. Defining both
+# keeps assignments working regardless of the backend selected by each app.
+assign [app_id="firefox"] workspace $ws1
+assign [class="firefox"] workspace $ws1
+
+assign [title="config"] workspace $ws2
+
+assign [title="ranger"] workspace $ws3
+assign [app_id="thunar"] workspace $ws3
+assign [class="Thunar"] workspace $ws3
+
+assign [app_id="org.telegram.desktop"] workspace $ws4
+assign [class="TelegramDesktop"] workspace $ws4
+assign [app_id="signal"] workspace $ws4
+assign [class="Signal"] workspace $ws4
+
+assign [app_id="org.mozilla.Thunderbird"] workspace $ws5
+assign [class="org.mozilla.Thunderbird"] workspace $ws5
+
+assign [app_id="mpv"] workspace $ws6
+assign [class="mpv"] workspace $ws6
+
+assign [title="music"] workspace $ws7
+assign [app_id="spotify"] workspace $ws7
+assign [class="Spotify"] workspace $ws7
+
+assign [app_id="ssh"] workspace $ws8
+assign [class="ssh"] workspace $ws8
+
+assign [app_id="chromium"] workspace $ws9
+assign [class="chromium"] workspace $ws9
+assign [title="upgrade"] workspace $ws9
+assign [app_id="com.bitwarden.desktop"] workspace $ws9
+assign [app_id="bitwarden"] workspace $ws9
+assign [class="Bitwarden"] workspace $ws9
+assign [app_id="obsidian"] workspace $ws9
+assign [class="obsidian"] workspace $ws9
+
+### Floating windows
+
+for_window [title="Avanzamento delle operazione sui file"] floating enable
+for_window [app_id="lxpolkit"] floating enable
+for_window [class="Lxpolkit"] floating enable
+for_window [app_id="galculator"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [app_id="gpick"] floating enable
+for_window [class="Gpick"] floating enable
+for_window [app_id="com.github.hluk.copyq"] floating enable
+for_window [app_id="copyq"] floating enable
+for_window [class="copyq"] floating enable
+
+### Session startup
+
+# Clipboard manager.
+exec copyq
+
+# Dim after 9 minutes, then lock and power off the displays after 10 minutes.
+# Restore brightness and outputs on activity, and lock before suspend or when
+# logind requests a session lock.
+exec swayidle -w \
+    timeout 540 'brightnessctl -s set 10' resume 'brightnessctl -r' \
+    timeout 600 'swaylock --daemonize --color 2e3440 && swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock --daemonize --color 2e3440' \
+    lock 'swaylock --daemonize --color 2e3440'
+
+### Status bar
+
+# Use the Sway-specific Waybar configuration.
+exec_always ~/.config/waybar/launch-sway.sh
+
+include /etc/sway/config.d/*
