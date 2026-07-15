@@ -1,0 +1,13 @@
+// Sway-specific Waybar overrides. Shared modules remain in config.jsonc so
+// the Hyprland and Sway bars stay in sync.
+{
+    "include": [
+        "~/.config/waybar/config.jsonc"
+    ],
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "sway/workspaces": {
+        "format": "{name}"
+    }
+}
