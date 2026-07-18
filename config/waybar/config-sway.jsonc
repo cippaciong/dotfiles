@@ -9,5 +9,18 @@
     ],
     "sway/workspaces": {
         "format": "{name}"
+    },
+    "custom/power": {
+        "format": "⏻ ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml",
+        "menu-actions": {
+            "logout": "uwsm stop",
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "swaylock --daemonize --color 2e3440 && systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
     }
 }
