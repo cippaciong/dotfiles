@@ -55,6 +55,13 @@ client.background       $black
 output * scale 1.2 bg "~/Nextcloud/Immagini/Sfondi/Rain on Pine.jpg" fill
 output HDMI-A-1 scale 1.5
 
+### Input
+
+# Use Right Alt as the Compose key.
+input type:keyboard {
+    xkb_options compose:ralt
+}
+
 ### Key bindings
 
 # Keep Sway's default terminal command while preserving the i3 binding layout.
