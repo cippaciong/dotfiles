@@ -37,16 +37,19 @@ smart_gaps off
 smart_borders off
 
 # Nord dark colors, migrated from the current i3 theme.
-set $black #2e3440
-set $focused #4c566a
-set $urgent #ebcb8b
+set $dark_grey #2e3440
+set $blue_grey #4c566a
+set $green #a3be8c
+set $yellow #ebcb8b
+set $light_grey #e5e9f0
+set $muted_grey #b9c8d1
 
-# class                 border   backgr.  text
-client.focused          $focused $focused #e5e9f0
-client.focused_inactive #3C4C87  #3C4C87  #b9c8d1
-client.unfocused        $black   $black   #e5e9f0
-client.urgent           $urgent  $urgent  $black
-client.background       $black
+# class                  border      background   text
+client.focused           $green      $green       $dark_grey
+client.focused_inactive  $dark_grey  $dark_grey   $muted_grey
+client.unfocused         $blue_grey  $blue_grey   $light_grey
+client.urgent            $yellow     $yellow      $dark_grey
+client.background        $dark_grey
 
 ### Outputs
 
