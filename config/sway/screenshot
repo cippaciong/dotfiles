@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+mode=${1:-full}
+
+case "$mode" in
+    full)
+        ;;
+    selection)
+        geometry=$(slurp) || exit 0
+        [ -n "$geometry" ] || exit 0
+        ;;
+    *)
+        printf 'Usage: %s [full|selection]\n' "$0" >&2
+        exit 2
+        ;;
+esac
+
+screenshot_dir="$HOME/Pictures/Screenshots"
+screenshot_file="$screenshot_dir/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+mkdir -p "$screenshot_dir"
+
+if [ "$mode" = selection ]; then
+    grim -g "$geometry" "$screenshot_file"
+else
+    grim "$screenshot_file"
+fi
+
+wl-copy --type image/png < "$screenshot_file"
