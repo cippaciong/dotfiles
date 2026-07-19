@@ -1,0 +1,6 @@
+configuration {
+    combi-display-format: "{mode}\t{text}";
+    window-format: "{c}\t{t}";
+}
+
+@theme "themes/squared-nord.rasi"
