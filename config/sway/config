@@ -50,10 +50,13 @@ client.background       $black
 
 ### Outputs
 
-# Use 1.2 scaling for the built-in/default output and 1.5 for the external
-# HDMI display. The later, specific rule overrides the wildcard.
-output * scale 1.2 bg "~/Nextcloud/Immagini/Sfondi/Rain on Pine.jpg" fill
-output HDMI-A-1 scale 1.5
+# Set the wallpaper on every output.
+output * bg "~/Nextcloud/Immagini/Sfondi/Rain on Pine.jpg" fill
+
+# Place the 1920x1200 laptop panel (1600 logical pixels wide at 1.2 scale)
+# to the left of the external HDMI display.
+output eDP-1 scale 1.2 pos 0 0
+output HDMI-A-1 scale 1.5 pos 1600 0
 
 ### Input
 
