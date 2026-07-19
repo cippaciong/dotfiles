@@ -72,7 +72,7 @@ input type:keyboard {
 
 # Keep Sway's default terminal command while preserving the i3 binding layout.
 bindsym $mod+Return exec $term
-bindsym $mod+space exec $menu -modi 'drun,run,window,ssh' -show drun
+bindsym $mod+space exec $menu -show-icons -show combi -modes combi -combi-modes "drun,run,window"
 
 bindsym $mod+Shift+q kill
 
