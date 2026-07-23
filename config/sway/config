@@ -65,7 +65,7 @@ output HDMI-A-1 scale 1.5 pos 1600 0
 
 # Use Right Alt as the Compose key.
 input type:keyboard {
-    xkb_options compose:ralt
+    xkb_options compose:ralt,caps:ctrl_modifier
 }
 
 ### Key bindings
