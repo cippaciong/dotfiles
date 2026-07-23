@@ -68,6 +68,12 @@ input type:keyboard {
     xkb_options compose:ralt,caps:ctrl_modifier
 }
 
+input type:touchpad {
+    tap enabled
+    tap_button_map lrm
+    natural_scroll enabled
+}
+
 ### Key bindings
 
 # Keep Sway's default terminal command while preserving the i3 binding layout.
