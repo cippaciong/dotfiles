@@ -177,6 +177,7 @@ bindsym $mod+r mode "resize"
 # Commands that work the same under Wayland are retained. X11-only display
 # commands are intentionally left out for now.
 bindsym $mod+Mod1+c exec $term --app-id=config --title=config nvim ~/.config/sway/config
+bindsym $mod+Mod1+u exec $term --app-id=upgrade --title=upgrade --hold yay -Syu
 bindsym $mod+Mod1+w exec firefox
 bindsym $mod+Mod1+m exec thunderbird
 bindsym $mod+Mod1+t exec Telegram
