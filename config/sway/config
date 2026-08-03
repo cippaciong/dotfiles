@@ -234,8 +234,8 @@ assign [class="Signal"] workspace $ws4
 assign [app_id="org.mozilla.Thunderbird"] workspace $ws5
 assign [class="org.mozilla.Thunderbird"] workspace $ws5
 
-assign [app_id="mpv"] workspace $ws6
-assign [class="mpv"] workspace $ws6
+assign [app_id="obsidian"] workspace $ws6
+assign [class="obsidian"] workspace $ws6
 
 assign [title="music"] workspace $ws7
 assign [app_id="spotify"] workspace $ws7
@@ -250,8 +250,6 @@ assign [title="upgrade"] workspace $ws9
 assign [app_id="com.bitwarden.desktop"] workspace $ws9
 assign [app_id="bitwarden"] workspace $ws9
 assign [class="Bitwarden"] workspace $ws9
-assign [app_id="obsidian"] workspace $ws9
-assign [class="obsidian"] workspace $ws9
 
 ### Floating windows
 
