@@ -189,9 +189,9 @@ bindsym Control+Mod1+p exec copyq show
 bindsym Control+Mod1+l exec swaylock --daemonize --color 2e3440
 
 # Speech-to-text dictation.
-bindsym Control+Shift+k exec dsnote --action start-listening-active-window
-bindsym Control+Shift+j exec dsnote --action start-listening-clipboard
-bindsym Control+Shift+s exec dsnote --action stop-listening
+bindsym Control+Shift+k exec flatpak run net.mkiol.SpeechNote --action start-listening-active-window
+bindsym Control+Shift+j exec flatpak run net.mkiol.SpeechNote --action start-listening-clipboard
+bindsym Control+Shift+s exec flatpak run net.mkiol.SpeechNote --action stop-listening
 
 bindsym $mod+t exec notify-send -u low "$(playerctl metadata title) ($(playerctl metadata album))" "$(playerctl metadata artist)"
 

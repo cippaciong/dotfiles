@@ -1,0 +1,46 @@
+# Multi_key-only sequences: every key in each sequence exists on a plain
+# US layout with a Compose key (e.g. compose:ralt). No dead keys.
+
+# Grave-accented vowels
+<Multi_key> <grave> <a>		: "à"	agrave
+<Multi_key> <grave> <e>		: "è"	egrave
+<Multi_key> <grave> <i>		: "ì"	igrave
+<Multi_key> <grave> <o>		: "ò"	ograve
+<Multi_key> <grave> <u>		: "ù"	ugrave
+<Multi_key> <grave> <A>		: "À"	Agrave
+<Multi_key> <grave> <E>		: "È"	Egrave
+<Multi_key> <grave> <I>		: "Ì"	Igrave
+<Multi_key> <grave> <O>		: "Ò"	Ograve
+<Multi_key> <grave> <U>		: "Ù"	Ugrave
+
+# Acute-accented vowels
+<Multi_key> <apostrophe> <a>	: "á"	aacute
+<Multi_key> <apostrophe> <e>	: "é"	eacute
+<Multi_key> <apostrophe> <i>	: "í"	iacute
+<Multi_key> <apostrophe> <o>	: "ó"	oacute
+<Multi_key> <apostrophe> <u>	: "ú"	uacute
+<Multi_key> <apostrophe> <A>	: "Á"	Aacute
+<Multi_key> <apostrophe> <E>	: "É"	Eacute
+<Multi_key> <apostrophe> <I>	: "Í"	Iacute
+<Multi_key> <apostrophe> <O>	: "Ó"	Oacute
+<Multi_key> <apostrophe> <U>	: "Ú"	Uacute
+
+# Other characters STT models commonly emit
+<Multi_key> <comma> <c>		: "ç"	ccedilla
+<Multi_key> <comma> <C>		: "Ç"	Ccedilla
+<Multi_key> <asciitilde> <n>	: "ñ"	ntilde
+<Multi_key> <asciitilde> <N>	: "Ñ"	Ntilde
+<Multi_key> <quotedbl> <u>	: "ü"	udiaeresis
+<Multi_key> <quotedbl> <o>	: "ö"	odiaeresis
+<Multi_key> <quotedbl> <a>	: "ä"	adiaeresis
+<Multi_key> <asciicircum> <e>	: "ê"	ecircumflex
+<Multi_key> <asciicircum> <a>	: "â"	acircumflex
+<Multi_key> <asciicircum> <o>	: "ô"	ocircumflex
+
+# Typographic punctuation
+<Multi_key> <apostrophe> <apostrophe>	: "’"	rightsinglequotemark
+<Multi_key> <less> <less>	: "«"	guillemotleft
+<Multi_key> <greater> <greater>	: "»"	guillemotright
+<Multi_key> <period> <period>	: "…"	ellipsis
+<Multi_key> <equal> <e>		: "€"	EuroSign
+<Multi_key> <o> <o>		: "°"	degree
