@@ -273,6 +273,9 @@ exec copyq
 # Local transcription
 exec handy
 
+# Polkit agent
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 # Dim after 9 minutes, then lock and power off the displays after 10 minutes.
 # Restore brightness and outputs on activity, and lock before suspend or when
 # logind requests a session lock.
