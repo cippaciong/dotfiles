@@ -270,6 +270,9 @@ for_window [class="copyq"] floating enable
 # Clipboard manager.
 exec copyq
 
+# Local transcription
+exec handy
+
 # Dim after 9 minutes, then lock and power off the displays after 10 minutes.
 # Restore brightness and outputs on activity, and lock before suspend or when
 # logind requests a session lock.
