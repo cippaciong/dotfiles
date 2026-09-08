@@ -223,6 +223,7 @@ assign [class="firefox"] workspace $ws1
 assign [title="config"] workspace $ws2
 
 assign [title="ranger"] workspace $ws3
+assign [app_id="Thunar"] workspace $ws3
 assign [app_id="thunar"] workspace $ws3
 assign [class="Thunar"] workspace $ws3
 
