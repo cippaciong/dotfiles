@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Dim after 9 minutes; lock and power off outputs after 10 minutes.
+# Restore them on activity; also lock before sleep or on a logind request.
+# Avoid starting a second swaylock when the session is already locked.
+lock='pgrep -x swaylock >/dev/null || swaylock --daemonize --color 2e3440'
+
+exec swayidle -w \
+    timeout 540 'brightnessctl -s set 10' resume 'brightnessctl -r' \
+    timeout 600 "$lock; swaymsg 'output * power off'" resume 'swaymsg "output * power on"' \
+    before-sleep "$lock" \
+    lock "$lock"
