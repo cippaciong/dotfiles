@@ -267,6 +267,9 @@ for_window [class="copyq"] floating enable
 
 ### Session startup
 
+# NetworkManager system tray applet.
+exec nm-applet --indicator
+
 # Clipboard manager.
 exec copyq
 
